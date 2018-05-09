@@ -1,0 +1,13 @@
+.dropdown__list {
+  width: 100%;
+  padding: 2rem;
+  display: block;
+  list-style: none;
+}
+
+.dropdown__list>li {
+  font-weight: bold;
+  margin: 0.45rem;
+  color: fade-out(#53f, 0.3);
+  padding: 0.5rem;
+}

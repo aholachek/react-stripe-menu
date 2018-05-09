@@ -1,0 +1,45 @@
+@import "https://fonts.googleapis.com/css?family=Karla";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(15deg, #25ddf5, #53f);
+  font-family: karla;
+  color: #666;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.navbar {
+  display: flex;
+  list-style: none;
+  max-width: 35rem;
+  margin: auto;
+}
+
+.navbar>li {
+  flex: 1;
+  position: relative;
+}
+
+.navbar>li+li .navbarItem {
+  margin-left: 0.5rem;
+}
+
+.navbarItem {
+  padding: 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dropdown-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25rem;
+  perspective: 1000px;
+}
