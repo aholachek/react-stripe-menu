@@ -1,31 +1,28 @@
 import React, { Component } from "react"
+import styled from "styled-components"
 
-class NavbarItem extends Component {
-  onMouseEnter = () => {
-    this.props.onMouseEnter(this.dropdownRef)
-  }
-  render() {
-    const { id, children } = this.props
-    return (
-      <li onMouseEnter={this.onMouseEnter}>
-        <div className="navbarItem">{children}</div>
-        <div ref={el => (this.dropdownRef = el)} className="dropdown-container" />
-      </li>
-    )
-  }
-}
+import NavbarItem from "./NavbarItem"
+
+const NavbarEl = styled.ul`
+  display: flex;
+  list-style: none;
+  max-width: 35rem;
+  margin: auto;
+`
 
 class Navbar extends Component {
   render() {
-    const { items, onMouseEnter, onMouseLeave } = this.props
+    const { items, onMouseEnter } = this.props
     return (
-      <ul className="navbar" onMouseLeave={onMouseLeave}>
-        {items.map((item, i) => (
-          <NavbarItem key={item.id} onMouseEnter={dropdownRef => onMouseEnter(i, dropdownRef)}>
-            {item.title}
-          </NavbarItem>
-        ))}
-      </ul>
+      <nav>
+        <NavbarEl>
+          {items.map((item, i) => (
+            <NavbarItem key={item.id} onMouseEnter={dropdownRef => onMouseEnter(i, dropdownRef)}>
+              {item}
+            </NavbarItem>
+          ))}
+        </NavbarEl>
+      </nav>
     )
   }
 }

@@ -1,63 +1,42 @@
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
-import anime from "animejs"
-import navbarConfig from "./navbarConfig"
-import Navbar from "./components/Navbar"
-import Dropdown from "./components/Dropdown"
-import "normalize.css"
+import { easing } from "popmotion"
+import AnimatedNavbar from "./components/AnimatedNavbar"
+import DevControls from "./components/DevControls"
+import styled from "styled-components"
 import "./index.css"
 
-const animDuration = 300
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
-class AnimatedNavbar extends Component {
-  state = { hovered: null }
-
-  onMouseEnter = (i, dropdownRef) => {
-    this.setState({
-      hovered: {
-        index: i,
-        dropdownRef,
-        direction: this.state.hovered ? (this.state.hovered.index < i ? "right" : "left") : null
-      }
-    })
+  > div:first-of-type {
+    flex: 1 0 auto;
   }
+`
 
-  onMouseLeave = event => {
-    debugger
-    // we're still inside the navbar, so ignore this event
-    if (this.el.contains(event.nativeEvent.path.toElement)) return
-    // we re-triggered this event while the dropdown was already
-    if (!this.state.hovered || this.state.animatingDropdownOut) return
-    setTimeout(() => {
-      this.setState({
-        animatingDropdownOut: true
-      })
-      setTimeout(() => {
-        this.setState({
-          animatingDropdownOut: false,
-          hovered: null
-        })
-      }, animDuration)
-    }, 20)
+class App extends Component {
+  state = { duration: 300, ease: "easeOut" }
+
+  onChange = data => {
+    this.setState(data)
   }
 
   render() {
-    const { config } = this.props
     return (
-      <div ref={el => (this.el = el)}>
-        <Navbar items={config} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} />
-        {(this.state.hovered || this.state.animatingDropdownOut) && (
-          <Dropdown
-            links={config[this.state.hovered.index].links}
-            direction={this.state.hovered.direction}
-            dropdownRef={this.state.hovered.dropdownRef}
-            animatingOut={this.state.animatingDropdownOut}
-            onMouseLeave={this.onMouseLeave}
-          />
-        )}
-      </div>
+      <AppContainer>
+                <AnimatedNavbar
+          tweenConfig={{ ease: easing[this.state.ease], duration: this.state.duration }}
+        />
+        <DevControls
+          duration={this.state.duration}
+          onChange={this.onChange}
+          ease={this.state.ease}
+        />
+      </AppContainer>
     )
   }
 }
 
-ReactDOM.render(<AnimatedNavbar config={navbarConfig} />, document.querySelector("#root"))
+ReactDOM.render(<App />, document.querySelector("#root"))

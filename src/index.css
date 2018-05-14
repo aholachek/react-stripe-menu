@@ -1,45 +1,42 @@
-@import "https://fonts.googleapis.com/css?family=Karla";
+@import "~normalize.css";
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --white: #fff;
+  --grey: #F7F9FC;
+  --dark-grey: #6b7c93;
+  --green: #24b47e;
+  --teal: #4F96CE;
+  --blue: #6772e5;
+  --dark-blue: #4F3EF5;
+  --gradient-right: #73DCF2;
+  --spacer: 1.8rem;
+}
+
 body {
-  min-height: 100vh;
-  background: linear-gradient(15deg, #25ddf5, #53f);
-  font-family: karla;
-  color: #666;
-  font-size: 18px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  color: var(--dark-grey);
 }
 
-.navbar {
-  display: flex;
+a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+a:hover,
+a:focus {
+  color: var(--dark-blue);
+}
+
+ul {
   list-style: none;
-  max-width: 35rem;
-  margin: auto;
+  padding-left: 0;
 }
 
-.navbar>li {
-  flex: 1;
-  position: relative;
-}
-
-.navbar>li+li .navbarItem {
-  margin-left: 0.5rem;
-}
-
-.navbarItem {
-  padding: 2rem;
-  color: white;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.dropdown-container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 25rem;
-  perspective: 1000px;
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
