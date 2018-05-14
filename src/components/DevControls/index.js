@@ -61,7 +61,7 @@ class DevControls extends Component {
           </fieldset>
           <fieldset key="easing">
             <legend>Easing:</legend>
-            {["linear", "easeOut", "backOut", "backInOut"].map(e => {
+            {["linear", "easeIn", "easeOut", "backOut", "backInOut"].map(e => {
               return (
                 <label>
                   <input type="radio" name="ease" value={e} checked={ease === e} />

@@ -5,7 +5,7 @@ import TransitionContents from "./TransitionContents"
 import DropdownCaret from "./DropdownComponents/Caret"
 import AltBackground from "./DropdownComponents/AltBackground"
 import Dropdown from "./DropdownComponents/Dropdown"
-import DropdownContainer from './DropdownComponents/Container'
+import DropdownContainer from "./DropdownComponents/Container"
 import { tween, styler } from "popmotion"
 
 const animateDropdownEnter = ({ el, tweenConfig }) => {
@@ -42,6 +42,14 @@ const getFirstDropdownSectionHeight = el =>
   el.querySelector("*[data-dropdown-section]").offsetHeight
 
 class AnimatedDropdown extends Component {
+  static propTypes = {
+    animatingOut: PropTypes.bool,
+    hostNode: PropTypes.object,
+    children: PropTypes.node,
+    direction: PropTypes.string,
+    tweenConfig: PropTypes.object
+  }
+
   state = { cachedChildren: null }
   getSnapshotBeforeUpdate(prevProps, prevState) {
     return {

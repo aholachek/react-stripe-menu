@@ -1,5 +1,6 @@
 {
-  "name": "stripe-menu",
+  "name": "react-stripe-menu",
+  "homepage": "http://aholachek.github.io/react-stripe-menu",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +18,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
   }
 }

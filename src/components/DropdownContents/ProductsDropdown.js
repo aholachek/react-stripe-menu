@@ -15,7 +15,7 @@ const Logo = styled.div`
   margin-right: 1rem;
   border-radius: 100%;
   opacity: 0.6;
-  background-color: ${({ color }) => `var(--${color}`};
+  background-color: ${({ color }) => `var(--${color})`};
 `
 
 const SubProductsList = styled.ul`
@@ -56,7 +56,6 @@ const ProductsDropdown = () => {
   return (
     <ProductsDropdownEl>
       <DropdownSection>
-        <div>
           <ProductsSection>
             <li>
               <div>
@@ -69,10 +68,10 @@ const ProductsDropdown = () => {
             </li>
             <li>
               <div>
-                <Logo color="pink" />
+                <Logo color="green" />
               </div>
               <div>
-                <Heading color="pink">Billing</Heading>
+                <Heading color="green">Billing</Heading>
                 <p>Build and scale your recurring business model</p>
               </div>
             </li>
@@ -86,7 +85,6 @@ const ProductsDropdown = () => {
               </div>
             </li>
           </ProductsSection>
-        </div>
       </DropdownSection>
       <DropdownSection>
         <SubProductsList>
@@ -103,13 +101,13 @@ const ProductsDropdown = () => {
             <div>Fight fraud with machine learning.</div>
           </li>
         </SubProductsList>
-        <div className="works-with-stripe">
+        <WorksWithStripe>
           <Heading noMarginBottom>
             <a href="#">
               <Icon /> Works with Stripe
             </a>
           </Heading>
-        </div>
+        </WorksWithStripe>
       </DropdownSection>
     </ProductsDropdownEl>
   )

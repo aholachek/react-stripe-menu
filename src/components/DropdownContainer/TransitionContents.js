@@ -32,6 +32,13 @@ const transitionContentsOut = (el, direction, tweenConfig) => {
 }
 
 export default class TransitionContents extends Component {
+  static propTypes = {
+    animatingOut: PropTypes.bool,
+    children: PropTypes.node,
+    duration: PropTypes.number,
+    tweenConfig: PropTypes.object
+  }
+
   componentDidMount() {
     const { animatingOut, direction } = this.props
     if (animatingOut) transitionContentsOut(this.el, direction, this.props.tweenConfig)

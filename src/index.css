@@ -1,4 +1,5 @@
 @import "~normalize.css";
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700');
 * {
   box-sizing: border-box;
 }
@@ -16,7 +17,7 @@
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: karla, -apple-system, system-ui, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   color: var(--dark-grey);
 }

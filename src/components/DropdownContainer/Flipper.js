@@ -12,7 +12,6 @@ const getFlipChildrenPositions = el => {
 }
 
 export default class Flipper extends Component {
-
   getSnapshotBeforeUpdate(prevProps, prevState) {
     return {
       cachedFlipChildrenPositions: getFlipChildrenPositions(this.el)
@@ -34,7 +33,6 @@ export default class Flipper extends Component {
   }
 
   animateMove({ cachedFlipChildrenPositions, filterId }) {
-    this.flipAnimationInProgress = true
     const newFlipChildrenPositions = getFlipChildrenPositions(this.el)
 
     Object.keys(newFlipChildrenPositions).forEach(id => {
@@ -57,19 +55,18 @@ export default class Flipper extends Component {
         },
         to: { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 },
         ...this.props.tweenConfig
-      }).start({
-        update: ({ translateX, translateY, scaleX, scaleY }) => {
-          if (!this.componentIsMounted) {
-            stop()
-            return
-          }
-          styler(el).set({ translateX, translateY, scaleY, scaleX })
-          if (transforms.some(t => t.indexOf("scale") === 0) && el.children[0])
-            styler(el.children[0]).set({
-              scaleY: 1 / scaleY,
-              scaleX: 1 / scaleX
-            })
+      }).start(({ translateX, translateY, scaleX, scaleY }) => {
+        if (!this.componentIsMounted) {
+          stop()
+          return
         }
+        console.log("updating", el, translateX, translateY, scaleY, scaleX)
+        styler(el).set({ translateX, translateY, scaleY, scaleX })
+        if (transforms.some(t => t.indexOf("scale") === 0) && el.children[0])
+          styler(el.children[0]).set({
+            scaleY: 1 / scaleY,
+            scaleX: 1 / scaleX
+          })
       })
     })
   }
