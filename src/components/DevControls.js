@@ -50,9 +50,9 @@ class DevControls extends Component {
         <div>
           <fieldset key="duration">
             <legend>Duration:</legend>
-            {[300, 500, 800, 2000].map(d => {
+            {[300, 500, 800, 3000].map(d => {
               return (
-                <label>
+                <label key={d}>
                   <input type="radio" name="duration" value={d} checked={duration === d} />
                   {d}&nbsp;ms
                 </label>
@@ -61,9 +61,9 @@ class DevControls extends Component {
           </fieldset>
           <fieldset key="easing">
             <legend>Easing:</legend>
-            {["linear", "easeIn", "easeOut", "backOut", "backInOut"].map(e => {
+            {["linear", "easeIn", "easeOut", "backOut"].map(e => {
               return (
-                <label>
+                <label key={e}>
                   <input type="radio" name="ease" value={e} checked={ease === e} />
                   {e}
                 </label>

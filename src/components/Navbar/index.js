@@ -12,9 +12,9 @@ const NavbarEl = styled.ul`
 
 class Navbar extends Component {
   render() {
-    const { items, onMouseEnter } = this.props
+    const { items, onMouseEnter, onMouseLeave } = this.props
     return (
-      <nav>
+      <nav onMouseLeave={onMouseLeave}>
         <NavbarEl>
           {items.map((item, i) => (
             <NavbarItem key={item.id} onMouseEnter={dropdownRef => onMouseEnter(i, dropdownRef)}>

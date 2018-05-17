@@ -1,11 +1,9 @@
 import React, { Component } from "react"
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
-import Flipper from "./Flipper"
+import Flipper from "../Flipper"
 import TransitionContents from "./TransitionContents"
-import DropdownCaret from "./DropdownComponents/Caret"
-import AltBackground from "./DropdownComponents/AltBackground"
-import Dropdown from "./DropdownComponents/Dropdown"
-import DropdownContainer from "./DropdownComponents/Container"
+import Dropdown from "./Dropdown"
 import { tween, styler } from "popmotion"
 
 const animateDropdownEnter = ({ el, tweenConfig }) => {
@@ -38,8 +36,9 @@ const animateAltBackground = ({ el, cachedAltTranslateY, altTranslateY, tweenCon
   }
 }
 
-const getFirstDropdownSectionHeight = el =>
-  el.querySelector("*[data-dropdown-section]").offsetHeight
+const getFirstDropdownSectionHeight = el => {
+  return el.querySelector("*[data-dropdown-section]").offsetHeight
+}
 
 class AnimatedDropdown extends Component {
   static propTypes = {
@@ -88,22 +87,27 @@ class AnimatedDropdown extends Component {
   render() {
     const { animatingOut, hostNode, children, direction, tweenConfig } = this.props
     const { cachedChildren } = this.state
+
+    const markup = (
+      <Dropdown
+        containerRef={el => {
+          this.el = el
+        }}
+        altBackgroundRef={el => (this.altBackground = el)}
+      >
+        <TransitionContents direction={direction} tweenConfig={tweenConfig}>
+          {children}
+        </TransitionContents>
+        {cachedChildren && (
+          <TransitionContents animatingOut direction={direction} tweenConfig={tweenConfig}>
+            {cachedChildren}
+          </TransitionContents>
+        )}
+      </Dropdown>
+    )
     return (
-      <Flipper hostNode={hostNode} tweenConfig={tweenConfig}>
-        <DropdownContainer innerRef={el => (this.el = el)}>
-          <DropdownCaret />
-          <Dropdown>
-            <TransitionContents direction={direction} tweenConfig={tweenConfig}>
-              {children}
-            </TransitionContents>
-            {cachedChildren && (
-              <TransitionContents animatingOut direction={direction} tweenConfig={tweenConfig}>
-                {cachedChildren}
-              </TransitionContents>
-            )}
-            <AltBackground innerRef={el => (this.altBackground = el)} />
-          </Dropdown>
-        </DropdownContainer>
+      <Flipper flipKey={hostNode} tweenConfig={tweenConfig} hostNode={hostNode}>
+        {ReactDOM.createPortal(markup, hostNode)}
       </Flipper>
     )
   }

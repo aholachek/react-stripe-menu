@@ -6,7 +6,7 @@ import DropdownSection from "./DropdownSection"
 import { Heading, HeadingLink } from "./Heading"
 
 const ProductsDropdownEl = styled.div`
-  width: 500px;
+  width: 525px;
 `
 
 const Logo = styled.div`
@@ -63,7 +63,7 @@ const ProductsDropdown = () => {
               </div>
               <div>
                 <Heading color="blue">Payments</Heading>
-                <p>A complete payments platform engineered for growth</p>
+                <p>A complete payments platform</p>
               </div>
             </li>
             <li>
