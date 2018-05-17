@@ -50,7 +50,7 @@ class DevControls extends Component {
         <div>
           <fieldset key="duration">
             <legend>Duration:</legend>
-            {[300, 500, 800, 3000].map(d => {
+            {[300, 500, 800, 2000].map(d => {
               return (
                 <label key={d}>
                   <input type="radio" name="duration" value={d} checked={duration === d} />
