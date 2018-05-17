@@ -46,7 +46,7 @@ export default class TransitionContents extends Component {
   }
 
   render() {
-    const { animatingOut, children, duration } = this.props
+    const { animatingOut, children } = this.props
     return (
       <TransitionEl innerRef={el => (this.el = el)} animatingOut={animatingOut}>
         {children}

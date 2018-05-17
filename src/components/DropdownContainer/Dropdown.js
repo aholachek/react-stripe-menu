@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import Flipped from "../Flipper/Flipped"
-import FlipTracker from "../Flipper/Flipped"
 
 const TransformOriginTopLeft = styled.div`
   transform-origin: 0 0;

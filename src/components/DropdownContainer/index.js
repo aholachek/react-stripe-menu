@@ -85,7 +85,7 @@ class AnimatedDropdown extends Component {
   }
 
   render() {
-    const { animatingOut, hostNode, children, direction, tweenConfig } = this.props
+    const { hostNode, children, direction, tweenConfig } = this.props
     const { cachedChildren } = this.state
 
     const markup = (

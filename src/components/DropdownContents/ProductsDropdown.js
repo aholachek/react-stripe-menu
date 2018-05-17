@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import Icon from "./Icon"
 import DropdownSection from "./DropdownSection"
-import { Heading, HeadingLink } from "./Heading"
+import { Heading } from "./Heading"
 
 const ProductsDropdownEl = styled.div`
   width: 525px;
