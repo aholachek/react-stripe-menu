@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import { tween, styler, easing } from "popmotion"
-import Flipped from "./Flipped"
+import { tween, styler } from "popmotion"
 
 const getFlipChildrenPositions = el => {
   return [...el.querySelectorAll("*[data-flip]")]

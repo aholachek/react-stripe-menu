@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { tween, styler } from "popmotion"
 import styled from "styled-components"
 import Navbar from "./Navbar"
 import DropdownContainer from "./DropdownContainer"
@@ -28,19 +27,19 @@ export default class AnimatedNavbar extends Component {
   }
 
   onMouseLeave = event => {
-    // // we're still inside the navbar, so ignore this event
-    // if (this.el.contains(event.nativeEvent.toElement)) return
-    // // we re-triggered this event while the dropdown was already leaving
-    // if (this.state.animatingDropdownOut) return
-    // this.setState({
-    //   animatingDropdownOut: true
-    // })
-    // setTimeout(() => {
-    //   this.setState({
-    //     animatingDropdownOut: false,
-    //     hovered: null
-    //   })
-    // }, this.props.tweenConfig.duration)
+    // we're still inside the navbar, so ignore this event
+    if (this.el.contains(event.nativeEvent.toElement)) return
+    // we re-triggered this event while the dropdown was already leaving
+    if (this.state.animatingDropdownOut) return
+    this.setState({
+      animatingDropdownOut: true
+    })
+    setTimeout(() => {
+      this.setState({
+        animatingDropdownOut: false,
+        hovered: null
+      })
+    }, this.props.tweenConfig.duration)
   }
 
   render() {
