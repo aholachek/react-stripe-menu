@@ -27,7 +27,7 @@ const transitionContentsOut = (el, direction, tweenConfig) => {
     from: { translateX: 0, opacity: 1 },
     to: { translateX: direction === "left" ? -translateDistance : translateDistance, opacity: 0 },
     easing: tweenConfig.easing,
-    duration: tweenConfig.duration * .75
+    duration: tweenConfig.duration
   }).start(styler(el).set)
 }
 
@@ -39,6 +39,12 @@ export default class TransitionContents extends Component {
     tweenConfig: PropTypes.object
   }
 
+  static defaultProps = {
+    tweenConfig: {
+      duration: 300
+    }
+  }
+
   componentDidMount() {
     const { animatingOut, direction } = this.props
     if (animatingOut) transitionContentsOut(this.el, direction, this.props.tweenConfig)
@@ -47,8 +53,9 @@ export default class TransitionContents extends Component {
 
   render() {
     const { animatingOut, children } = this.props
+    // data attribute is a hack to enable DropdownContainer to select its current and animating out dropdown children
     return (
-      <TransitionEl innerRef={el => (this.el = el)} animatingOut={animatingOut}>
+      <TransitionEl innerRef={el => (this.el = el)} animatingOut={animatingOut} data-transition>
         {children}
       </TransitionEl>
     )

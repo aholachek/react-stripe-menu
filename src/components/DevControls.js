@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 const Form = styled.form`
   padding: 2.5rem 0;
+  background-color: var(--white);
 
   > div {
     max-width: 900px;

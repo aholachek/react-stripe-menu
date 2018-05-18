@@ -11,7 +11,7 @@ const NavbarItemButton = styled.div`
   cursor: pointer;
 `
 
-const NavbarListItem = styled.li`
+const NavbarItemEl = styled.li`
   flex: 1;
   position: relative;
   margin-left: 0.5rem;
@@ -20,7 +20,7 @@ const NavbarListItem = styled.li`
   }
 `
 
-const DropdownContainer = styled.div`
+const DropdownSlot = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -29,14 +29,16 @@ const DropdownContainer = styled.div`
 
 export default class NavbarItem extends Component {
   onMouseEnter = () => {
-    this.props.onMouseEnter(this.dropdownRef)
+    this.props.onMouseEnter(this.props.index)
   }
+
   render() {
+    const { title, children } = this.props
     return (
-      <NavbarListItem onMouseEnter={this.onMouseEnter}>
-        <NavbarItemButton>{this.props.children}</NavbarItemButton>
-        <DropdownContainer innerRef={el => (this.dropdownRef = el)} />
-      </NavbarListItem>
+      <NavbarItemEl onMouseEnter={this.onMouseEnter}>
+        <NavbarItemButton>{title}</NavbarItemButton>
+        <DropdownSlot>{children}</DropdownSlot>
+      </NavbarItemEl>
     )
   }
 }

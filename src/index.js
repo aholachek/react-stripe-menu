@@ -7,6 +7,7 @@ import styled from "styled-components"
 import "./index.css"
 
 const AppContainer = styled.div`
+  background: linear-gradient(15deg, var(--dark-blue), var(--gradient-right));
   display: flex;
   flex-direction: column;
   min-height: 100vh;

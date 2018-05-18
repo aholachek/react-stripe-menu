@@ -47,7 +47,7 @@ const Dropdown = ({ children, containerRef, altBackgroundRef }) => {
       <Flipped flipId="dropdown-caret" translateX>
         <Caret />
       </Flipped>
-      <Flipped flipId="dropdown" translateX scaleX scaleY>
+      <Flipped flipId="dropdown" translateX scaleX scaleY cacheContents>
         <DropdownBackground>
           <Flipped inverseFlipId="dropdown">
             <TransformOriginTopLeft>

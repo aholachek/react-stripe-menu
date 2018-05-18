@@ -9,9 +9,8 @@ const getFlipChildrenPositions = el => {
 
 export default class Flipper extends Component {
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    const parentEl = prevProps.hostNode || this.el
     return {
-      cachedFlipChildrenPositions: getFlipChildrenPositions(parentEl)
+      cachedFlipChildrenPositions: getFlipChildrenPositions(this.el)
     }
   }
 
@@ -24,21 +23,20 @@ export default class Flipper extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, cachedData) {
-    if (this.props.flipKey !== prevProps.flipKey) {
+    if (this.props.flipKey !== undefined && this.props.flipKey !== prevProps.flipKey) {
       this.animateMove(cachedData)
     }
   }
 
-  animateMove({ cachedFlipChildrenPositions, filterId }) {
-    const parentEl = this.props.hostNode || this.el
-    const newFlipChildrenPositions = getFlipChildrenPositions(parentEl)
-
+  animateMove({ cachedFlipChildrenPositions, cachedContents }) {
+    const newFlipChildrenPositions = getFlipChildrenPositions(this.el)
     const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
     Object.keys(newFlipChildrenPositions).forEach(id => {
       const prevRect = cachedFlipChildrenPositions[id]
       const currentRect = newFlipChildrenPositions[id]
-      const el = parentEl.querySelector(`*[data-flip="${id}"]`)
+      if (!prevRect || !currentRect) return
+      const el = this.el.querySelector(`*[data-flip="${id}"]`)
 
       const fromVals = { ...defaultVals }
       if (el.dataset.translateX) fromVals.translateX = prevRect.x - currentRect.x

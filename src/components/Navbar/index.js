@@ -1,27 +1,21 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-
 import NavbarItem from "./NavbarItem"
 
-const NavbarEl = styled.ul`
+const NavbarList = styled.ul`
   display: flex;
   list-style: none;
   max-width: 35rem;
   margin: auto;
+  padding: 1rem;
 `
 
 class Navbar extends Component {
   render() {
-    const { items, onMouseEnter, onMouseLeave } = this.props
+    const { children, onMouseLeave } = this.props
     return (
       <nav onMouseLeave={onMouseLeave}>
-        <NavbarEl>
-          {items.map((item, i) => (
-            <NavbarItem key={item.id} onMouseEnter={dropdownRef => onMouseEnter(i, dropdownRef)}>
-              {item}
-            </NavbarItem>
-          ))}
-        </NavbarEl>
+        <NavbarList>{children}</NavbarList>
       </nav>
     )
   }

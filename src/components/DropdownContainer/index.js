@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, Children } from "react"
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import Flipper from "../Flipper"
@@ -22,25 +22,31 @@ const animateDropdownLeave = ({ el, tweenConfig }) => {
   }).start(styler(el).set)
 }
 
-const animateAltBackground = ({ el, cachedAltTranslateY, altTranslateY, tweenConfig }) => {
-  if (cachedAltTranslateY) {
-    tween({
-      from: {
-        translateY: cachedAltTranslateY
-      },
-      to: { translateY: altTranslateY },
-      ...tweenConfig
-    }).start(styler(el).set)
-  } else {
-    styler(el).set({ translateY: altTranslateY })
-  }
-}
-
 const getFirstDropdownSectionHeight = el => {
   return el.querySelector("*[data-dropdown-section]").offsetHeight
 }
 
-class AnimatedDropdown extends Component {
+const updateAltBackground = ({ el, altBackground, tweenConfig }) => {
+  const dropdownContents = el.querySelectorAll("*[data-transition]")
+  const currentHeight = getFirstDropdownSectionHeight(dropdownContents[0])
+
+  if (dropdownContents.length == 2) {
+    // transition the grey background from its previous height to its current height
+    const prevHeight = getFirstDropdownSectionHeight(dropdownContents[1])
+    tween({
+      from: {
+        translateY: prevHeight
+      },
+      to: { translateY: currentHeight },
+      ...tweenConfig
+    }).start(styler(altBackground).set)
+  } else {
+    // just set the background to the appropriate height without a transition
+    styler(altBackground).set({ translateY: currentHeight })
+  }
+}
+
+class DropdownContainer extends Component {
   static propTypes = {
     animatingOut: PropTypes.bool,
     hostNode: PropTypes.object,
@@ -49,68 +55,36 @@ class AnimatedDropdown extends Component {
     tweenConfig: PropTypes.object
   }
 
-  state = { cachedChildren: null }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    return {
-      cachedChildren: prevProps.children,
-      cachedAltTranslateY: getFirstDropdownSectionHeight(this.el)
-    }
-  }
   componentDidMount() {
-    animateDropdownEnter({ el: this.el, tweenConfig: this.props.tweenConfig })
-    animateAltBackground({
-      el: this.altBackground,
-      altTranslateY: getFirstDropdownSectionHeight(this.el),
+    if (!this.props.direction) {
+      animateDropdownEnter({ el: this.el, tweenConfig: this.props.tweenConfig })
+    }
+    updateAltBackground({
+      el: this.el,
+      altBackground: this.altBackground,
       tweenConfig: this.props.tweenConfig
     })
   }
-  componentDidUpdate(prevProps, prevState, { cachedChildren, cachedAltTranslateY }) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.animatingOut && !prevProps.animatingOut) {
       animateDropdownLeave({ el: this.el, tweenConfig: this.props.tweenConfig })
-    }
-    if (cachedChildren.type !== this.props.children.type) {
-      animateAltBackground({
-        el: this.altBackground,
-        cachedAltTranslateY,
-        altTranslateY: getFirstDropdownSectionHeight(this.el),
-        tweenConfig: this.props.tweenConfig
-      })
-      this.setState({
-        cachedChildren
-      })
-      setTimeout(() => {
-        this.setState({ cachedChildren: null })
-      }, this.props.tweenConfig.duration)
     }
   }
 
   render() {
     const { hostNode, children, direction, tweenConfig } = this.props
-    const { cachedChildren } = this.state
 
-    const markup = (
+    return (
       <Dropdown
         containerRef={el => {
           this.el = el
         }}
         altBackgroundRef={el => (this.altBackground = el)}
       >
-        <TransitionContents direction={direction} tweenConfig={tweenConfig}>
-          {children}
-        </TransitionContents>
-        {cachedChildren && (
-          <TransitionContents animatingOut direction={direction} tweenConfig={tweenConfig}>
-            {cachedChildren}
-          </TransitionContents>
-        )}
+        {children}
       </Dropdown>
-    )
-    return (
-      <Flipper flipKey={hostNode} tweenConfig={tweenConfig} hostNode={hostNode}>
-        {ReactDOM.createPortal(markup, hostNode)}
-      </Flipper>
     )
   }
 }
 
-export default AnimatedDropdown
+export default DropdownContainer
