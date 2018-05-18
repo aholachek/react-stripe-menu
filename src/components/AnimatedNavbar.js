@@ -18,11 +18,29 @@ const navbarConfig = [
 export default class AnimatedNavbar extends Component {
   state = { activeIndex: undefined, prevActiveIndex: undefined, animatingOut: false }
 
+  resetDropdownState = () => {
+    this.setState({
+      animatingOut: false,
+      activeIndex: undefined,
+      prevActiveIndex: undefined
+    })
+  }
+
   onMouseEnter = i => {
-    this.setState(prevState => ({
-      activeIndex: i,
-      prevActiveIndex: prevState.activeIndex
-    }))
+    if (this.pendingDropdownRemoval) {
+      this.resetDropdownState()
+      clearTimeout(this.pendingDropdownRemoval)
+      delete this.pendingDropdownRemoval
+    }
+    // set to next tick to make sure old dropdown was fully removed
+    // (setState is async)
+    setTimeout(() => {
+      this.setState(prevState => ({
+        activeIndex: i,
+        prevActiveIndex: prevState.activeIndex,
+        animatingOut: false
+      }))
+    })
   }
 
   onMouseLeave = () => {
@@ -30,12 +48,11 @@ export default class AnimatedNavbar extends Component {
     this.setState({
       animatingOut: true
     })
-    setTimeout(() => {
-      this.setState({
-        animatingOut: false,
-        activeIndex: undefined
-      })
-    }, this.props.tweenConfig.duration)
+    this.pendingDropdownRemoval = true
+    this.pendingDropdownRemoval = setTimeout(
+      this.resetDropdownState,
+      this.props.tweenConfig.duration
+    )
   }
 
   getNavbarItemContents = (index, direction) => {
@@ -61,7 +78,6 @@ export default class AnimatedNavbar extends Component {
         </DropdownContainer>
       )
     }
-    return null
   }
 
   render() {

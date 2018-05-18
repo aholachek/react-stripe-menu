@@ -7,7 +7,7 @@ import Dropdown from "./Dropdown"
 import { tween, styler } from "popmotion"
 
 const animateDropdownEnter = ({ el, tweenConfig }) => {
-  tween({
+  const { stop } = tween({
     from: { rotateX: 45, opacity: 0 },
     to: { rotateX: 0, opacity: 1 },
     ...tweenConfig

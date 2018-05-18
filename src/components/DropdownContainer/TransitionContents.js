@@ -9,12 +9,12 @@ const TransitionEl = styled.div`
   left: 0;
 `
 
-const translateDistance = 50
+const translateDistance = 100
 
 const transitionContentsIn = (el, direction, tweenConfig) => {
   tween({
     from: {
-      translateX: direction === "left" ? translateDistance : -translateDistance,
+      translateX: direction === "forwards" ? -translateDistance : translateDistance,
       opacity: 0
     },
     to: { translateX: 0, opacity: 1 },
@@ -24,10 +24,14 @@ const transitionContentsIn = (el, direction, tweenConfig) => {
 
 const transitionContentsOut = (el, direction, tweenConfig) => {
   tween({
-    from: { translateX: 0, opacity: 1 },
-    to: { translateX: direction === "left" ? -translateDistance : translateDistance, opacity: 0 },
+    from: {
+      opacity: 1
+    },
+    to: {
+      opacity: 0
+    },
     easing: tweenConfig.easing,
-    duration: tweenConfig.duration
+    duration: tweenConfig.duration/2
   }).start(styler(el).set)
 }
 
