@@ -55,45 +55,45 @@ export default class AnimatedNavbar extends Component {
     )
   }
 
-  getNavbarItemContents = (index, direction) => {
-    if (index === this.state.activeIndex) {
-      const PrevDropdown =
-        navbarConfig[this.state.prevActiveIndex] !== undefined &&
-        navbarConfig[this.state.prevActiveIndex].dropdown
-      const CurrentDropdown = navbarConfig[this.state.activeIndex].dropdown
-      return (
-        <DropdownContainer direction={direction} animatingOut={this.state.animatingOut}>
-          <TransitionContents direction={direction} tweenConfig={this.props.tweenConfig}>
-            <CurrentDropdown />
-          </TransitionContents>
-          {PrevDropdown && (
-            <TransitionContents
-              animatingOut
-              direction={direction}
-              tweenConfig={this.props.tweenConfig}
-            >
-              <PrevDropdown />
-            </TransitionContents>
-          )}
-        </DropdownContainer>
-      )
-    }
-  }
-
   render() {
     const { tweenConfig } = this.props
-    let direction = null
+
+    let CurrentDropdown
+    if (this.state.activeIndex !== undefined ) CurrentDropdown = navbarConfig[this.state.activeIndex].dropdown
+
+    let direction
+    let PrevDropdown
     if (this.state.prevActiveIndex !== undefined) {
       direction = this.state.activeIndex > this.state.prevActiveIndex ? "forwards" : "backwards"
+      PrevDropdown = navbarConfig[this.state.prevActiveIndex].dropdown
     }
 
     return (
       <Flipper flipKey={this.state.activeIndex} tweenConfig={tweenConfig}>
         <Navbar onMouseLeave={this.onMouseLeave}>
-          {navbarConfig.map((n, i) => {
+          {navbarConfig.map((n, index) => {
             return (
-              <NavbarItem title={n.title} index={i} onMouseEnter={this.onMouseEnter}>
-                {this.getNavbarItemContents(i, direction)}
+              <NavbarItem title={n.title} index={index} onMouseEnter={this.onMouseEnter}>
+                {this.state.activeIndex === index && (
+                  <DropdownContainer
+                    direction={direction}
+                    animatingOut={this.state.animatingOut}
+                    tweenConfig={this.props.tweenConfig}
+                  >
+                    <TransitionContents direction={direction} tweenConfig={this.props.tweenConfig}>
+                      <CurrentDropdown />
+                    </TransitionContents>
+                    {PrevDropdown && (
+                      <TransitionContents
+                        animatingOut
+                        direction={direction}
+                        tweenConfig={this.props.tweenConfig}
+                      >
+                        <PrevDropdown />
+                      </TransitionContents>
+                    )}
+                  </DropdownContainer>
+                )}
               </NavbarItem>
             )
           })}
