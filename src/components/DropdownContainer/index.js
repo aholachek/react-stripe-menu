@@ -23,13 +23,13 @@ const animateDropdownLeave = ({ el, tweenConfig }) => {
 }
 
 const getFirstDropdownSectionHeight = el => {
-  return
-  el.querySelector("*[data-dropdown-section]")
+  return el.querySelector("*[data-dropdown-section]")
     ? el.querySelector("*[data-dropdown-section]").offsetHeight
     : 0
 }
 
 const updateAltBackground = ({ el, altBackground, tweenConfig }) => {
+  debugger
   const dropdownContents = el.querySelectorAll("*[data-transition]")
   const currentHeight = getFirstDropdownSectionHeight(dropdownContents[0])
 
