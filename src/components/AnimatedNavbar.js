@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react"
-import styled from "styled-components"
 import Navbar from "./Navbar"
 import NavbarItem from "./Navbar/NavbarItem"
 import Flipper from "./Flipper"

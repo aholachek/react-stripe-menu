@@ -43,7 +43,7 @@ class DevControls extends Component {
         innerRef={el => (this.el = el)}
         onChange={() => {
           this.props.onChange({
-            duration: parseInt(this.el.querySelector('input[name="duration"]:checked').value),
+            duration: parseInt(this.el.querySelector('input[name="duration"]:checked').value, 10),
             ease: this.el.querySelector('input[name="ease"]:checked').value
           })
         }}

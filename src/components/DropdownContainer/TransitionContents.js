@@ -31,7 +31,7 @@ const transitionContentsOut = (el, direction, tweenConfig) => {
       opacity: 0
     },
     easing: tweenConfig.easing,
-    duration: tweenConfig.duration/2
+    duration: tweenConfig.duration / 2
   }).start(styler(el).set)
 }
 
@@ -57,7 +57,7 @@ export default class TransitionContents extends Component {
 
   render() {
     const { animatingOut, children } = this.props
-    // data attribute is a hack to enable DropdownContainer to select its current and animating out dropdown children
+    // data attribute is a hack to enable DropdownContainer/index to correctly size the "altBackground" element
     return (
       <TransitionEl innerRef={el => (this.el = el)} animatingOut={animatingOut} data-transition>
         {children}

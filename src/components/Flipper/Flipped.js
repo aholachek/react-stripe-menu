@@ -1,7 +1,7 @@
-import React from "react"
+import { Children, cloneElement} from "react"
 
 export default function Flipped({ children, flipId, ...rest }) {
-  const child = React.Children.only(children)
+  const child = Children.only(children)
   // turn props into DOM data attributes
   const props = Object.entries(rest)
     .map(r => [
@@ -15,5 +15,5 @@ export default function Flipped({ children, flipId, ...rest }) {
     .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})
 
   if (flipId) props["data-flip"] = flipId
-  return React.cloneElement(child, props)
+  return cloneElement(child, props)
 }

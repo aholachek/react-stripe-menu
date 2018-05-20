@@ -1,13 +1,10 @@
-import React, { Component, Children } from "react"
-import ReactDOM from "react-dom"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
-import Flipper from "../Flipper"
-import TransitionContents from "./TransitionContents"
 import Dropdown from "./Dropdown"
 import { tween, styler } from "popmotion"
 
 const animateDropdownEnter = ({ el, tweenConfig }) => {
-  const { stop } = tween({
+  tween({
     from: { rotateX: 45, opacity: 0 },
     to: { rotateX: 0, opacity: 1 },
     ...tweenConfig
@@ -29,11 +26,10 @@ const getFirstDropdownSectionHeight = el => {
 }
 
 const updateAltBackground = ({ el, altBackground, tweenConfig }) => {
-  debugger
   const dropdownContents = el.querySelectorAll("*[data-transition]")
   const currentHeight = getFirstDropdownSectionHeight(dropdownContents[0])
 
-  if (dropdownContents.length == 2) {
+  if (dropdownContents.length === 2) {
     // transition the grey background from its previous height to its current height
     const prevHeight = getFirstDropdownSectionHeight(dropdownContents[1])
     tween({
@@ -52,7 +48,6 @@ const updateAltBackground = ({ el, altBackground, tweenConfig }) => {
 class DropdownContainer extends Component {
   static propTypes = {
     animatingOut: PropTypes.bool,
-    hostNode: PropTypes.object,
     children: PropTypes.node,
     direction: PropTypes.string,
     tweenConfig: PropTypes.object
@@ -75,8 +70,6 @@ class DropdownContainer extends Component {
   }
 
   render() {
-    const { hostNode, children, direction, tweenConfig } = this.props
-
     return (
       <Dropdown
         containerRef={el => {
@@ -84,7 +77,7 @@ class DropdownContainer extends Component {
         }}
         altBackgroundRef={el => (this.altBackground = el)}
       >
-        {children}
+        {this.props.children}
       </Dropdown>
     )
   }
