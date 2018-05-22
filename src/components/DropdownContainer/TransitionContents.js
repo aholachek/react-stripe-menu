@@ -9,7 +9,7 @@ const TransitionEl = styled.div`
   left: 0;
 `
 
-const translateDistance = 100
+const translateDistance = 75
 
 const transitionContentsIn = (el, direction, tweenConfig) => {
   tween({
@@ -22,7 +22,7 @@ const transitionContentsIn = (el, direction, tweenConfig) => {
   }).start(styler(el).set)
 }
 
-const transitionContentsOut = (el, direction, tweenConfig) => {
+const transitionContentsOut = (el, tweenConfig) => {
   tween({
     from: {
       opacity: 1
@@ -31,7 +31,7 @@ const transitionContentsOut = (el, direction, tweenConfig) => {
       opacity: 0
     },
     easing: tweenConfig.easing,
-    duration: tweenConfig.duration / 2
+    duration: tweenConfig.duration * .75
   }).start(styler(el).set)
 }
 
@@ -51,7 +51,7 @@ export default class TransitionContents extends Component {
 
   componentDidMount() {
     const { animatingOut, direction } = this.props
-    if (animatingOut) transitionContentsOut(this.el, direction, this.props.tweenConfig)
+    if (animatingOut) transitionContentsOut(this.el, this.props.tweenConfig)
     else if (direction) transitionContentsIn(this.el, direction, this.props.tweenConfig)
   }
 
