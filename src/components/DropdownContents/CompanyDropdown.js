@@ -1,18 +1,21 @@
 import React from "react"
 import styled from "styled-components"
-import Icon from "./Icon"
-import DropdownSection from "./DropdownSection"
-import { Heading, HeadingLink } from "./Heading"
-import LinkList from "./LinkList"
+import {
+  Heading,
+  HeadingLink,
+  LinkList,
+  DropdownSection,
+  Icon
+} from "./Components"
 
 const CompanyDropdownEl = styled.div`
-  width: 25rem;
+  width: 23rem;
 `
 
 const CompanyDropdown = () => {
   return (
     <CompanyDropdownEl>
-      <DropdownSection>
+      <DropdownSection data-first-dropdown-section>
         <ul>
           <HeadingLink>
             <a href="/">

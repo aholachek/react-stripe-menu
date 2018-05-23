@@ -10,7 +10,7 @@ const getFlipChildrenPositions = el => {
 
 class Flipper extends Component {
   static propTypes = {
-    flipKey: PropTypes.string.isRequired,
+    flipKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     children: PropTypes.node.isRequired,
     tweenConfig: PropTypes.shape({
       duration: PropTypes.number,
@@ -21,14 +21,6 @@ class Flipper extends Component {
     return {
       cachedFlipChildrenPositions: getFlipChildrenPositions(this.el)
     }
-  }
-
-  componentDidMount() {
-    this.componentIsMounted = true
-  }
-
-  componentWillUnmount() {
-    this.componentIsMounted = false
   }
 
   componentDidUpdate(prevProps, prevState, cachedData) {
@@ -60,29 +52,38 @@ class Flipper extends Component {
       if (el.dataset.scaleY)
         fromVals.scaleY = prevRect.height / currentRect.height
 
+      // immediately apply styles to prevent flicker
+      styler(el).set(fromVals).render()
+
+      const body = document.querySelector("body")
+
       const { stop } = tween({
         from: fromVals,
         to: defaultVals,
         ...this.props.tweenConfig
       }).start(({ translateX, translateY, scaleX, scaleY }) => {
-        if (!this.componentIsMounted) {
+        if (!body.contains(el)) {
           stop && stop()
           return
         }
         styler(el).set({ translateX, translateY, scaleY, scaleX })
+
         // if we're scaling and we have children with data-inverse-flip-ids
         // apply the inverse of the scale so that the children don't distort
-        if (el.dataset.scaleX || el.dataset.scaleY) {
-          const childElements = [
-            ...el.querySelectorAll(`*[data-inverse-flip-id="${id}"]`)
-          ]
-          childElements.forEach(el => {
-            styler(el).set({
-              scaleY: 1 / scaleY,
-              scaleX: 1 / scaleX
-            })
-          })
-        }
+
+        const childElements = [
+          ...el.querySelectorAll(`*[data-inverse-flip-id="${id}"]`)
+        ]
+
+        childElements.forEach(child => {
+          const inverseVals = {}
+          if (child.dataset.translateX) inverseVals.translateX = -translateX
+          if (child.dataset.translateY) inverseVals.translateY = -translateY
+          if (child.dataset.scaleX) inverseVals.scaleX = 1 / scaleX
+          if (child.dataset.scaleY) inverseVals.scaleY = 1 / scaleY
+
+          styler(child).set(inverseVals)
+        })
       })
     })
   }

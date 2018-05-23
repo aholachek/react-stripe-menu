@@ -1,8 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Icon from "./Icon"
-import DropdownSection from "./DropdownSection"
-import { Heading } from "./Heading"
+import { Icon, DropdownSection, Heading } from "./Components"
 
 const ProductsDropdownEl = styled.div`
   width: 525px;
@@ -54,36 +52,38 @@ h3 {
 const ProductsDropdown = () => {
   return (
     <ProductsDropdownEl>
-      <DropdownSection>
-          <ProductsSection>
-            <li>
-              <div>
-                <Logo color="blue" />
-              </div>
-              <div>
-                <Heading color="blue">Payments</Heading>
-                <p>A complete payments platform</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <Logo color="green" />
-              </div>
-              <div>
-                <Heading color="green">Billing</Heading>
-                <p>Build and scale your recurring business model</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <Logo color="teal" />
-              </div>
-              <div>
-                <Heading color="teal">Connect</Heading>
-                <p style={{ marginBottom: 0 }}>Everything platforms need to get sellers paid</p>
-              </div>
-            </li>
-          </ProductsSection>
+      <DropdownSection data-first-dropdown-section>
+        <ProductsSection>
+          <li>
+            <div>
+              <Logo color="blue" />
+            </div>
+            <div>
+              <Heading color="blue">Payments</Heading>
+              <p>A complete payments platform</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <Logo color="green" />
+            </div>
+            <div>
+              <Heading color="green">Billing</Heading>
+              <p>Build and scale your recurring business model</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <Logo color="teal" />
+            </div>
+            <div>
+              <Heading color="teal">Connect</Heading>
+              <p style={{ marginBottom: 0 }}>
+                Everything platforms need to get sellers paid
+              </p>
+            </div>
+          </li>
+        </ProductsSection>
       </DropdownSection>
       <DropdownSection>
         <SubProductsList>

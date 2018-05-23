@@ -1,37 +1,36 @@
-import React, { Component } from "react"
+import React, { Component, Children } from "react"
 import PropTypes from "prop-types"
-import Dropdown from "./Dropdown"
+import {
+  DropdownRoot,
+  TransformOriginTopLeft,
+  Caret,
+  DropdownBackground,
+  AltBackground,
+  ContentsContainer,
+  FadeInContents,
+  FadeOutContents
+} from "./Components"
+import Flipped from "../Flipper/Flipped"
 import { tween, styler } from "popmotion"
 
-const animateDropdownEnter = ({ el, tweenConfig }) => {
-  tween({
-    from: { rotateX: 45, opacity: 0 },
-    to: { rotateX: 0, opacity: 1 },
-    ...tweenConfig
-  }).start(styler(el).set)
-}
-
-const animateDropdownLeave = ({ el, tweenConfig }) => {
-  tween({
-    from: { rotateX: 0, opacity: 1 },
-    to: { rotateX: 45, opacity: 0 },
-    ...tweenConfig
-  }).start(styler(el).set)
-}
-
 const getFirstDropdownSectionHeight = el => {
-  return el.querySelector("*[data-dropdown-section]")
-    ? el.querySelector("*[data-dropdown-section]").offsetHeight
+  if (!el) return null
+  return el.querySelector("*[data-first-dropdown-section]")
+    ? el.querySelector("*[data-first-dropdown-section]").offsetHeight
     : 0
 }
 
-const updateAltBackground = ({ el, altBackground, tweenConfig }) => {
-  const dropdownContents = el.querySelectorAll("*[data-transition]")
-  const currentHeight = getFirstDropdownSectionHeight(dropdownContents[0])
+const updateAltBackground = ({
+  altBackground,
+  prevDropdown,
+  currentDropdown,
+  tweenConfig
+}) => {
+  const prevHeight = getFirstDropdownSectionHeight(prevDropdown)
+  const currentHeight = getFirstDropdownSectionHeight(currentDropdown)
 
-  if (dropdownContents.length === 2) {
-    // transition the grey background from its previous height to its current height
-    const prevHeight = getFirstDropdownSectionHeight(dropdownContents[1])
+  if (prevHeight) {
+    // transition the grey ("alt") background from its previous height to its current height
     tween({
       from: {
         translateY: prevHeight
@@ -40,45 +39,78 @@ const updateAltBackground = ({ el, altBackground, tweenConfig }) => {
       ...tweenConfig
     }).start(styler(altBackground).set)
   } else {
-    // just set the background to the appropriate height without a transition
-    styler(altBackground).set({ translateY: currentHeight })
+    // just immediately set the background to the appropriate height
+    // since we don't have a stored value
+    styler(altBackground)
+      .set({ translateY: currentHeight })
+      .render()
   }
 }
 
 class DropdownContainer extends Component {
   static propTypes = {
+    children: PropTypes.node.isRequired,
     animatingOut: PropTypes.bool,
-    children: PropTypes.node,
-    direction: PropTypes.string,
-    tweenConfig: PropTypes.object
+    direction: PropTypes.oneOf(["left", "right"]),
+    tweenConfig: PropTypes.shape({
+      duration: PropTypes.number,
+      easing: PropTypes.func
+    })
   }
 
   componentDidMount() {
-    if (!this.props.direction) {
-      animateDropdownEnter({ el: this.el, tweenConfig: this.props.tweenConfig })
-    }
     updateAltBackground({
-      el: this.el,
-      altBackground: this.altBackground,
+      altBackground: this.altBackgroundEl,
+      prevDropdown: this.prevDropdownEl,
+      currentDropdown: this.currentDropdownEl,
       tweenConfig: this.props.tweenConfig
     })
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.animatingOut && !prevProps.animatingOut) {
-      animateDropdownLeave({ el: this.el, tweenConfig: this.props.tweenConfig })
-    }
-  }
 
   render() {
+    const { children, direction, animatingOut, tweenConfig } = this.props
+    const [currentDropdown, prevDropdown] = Children.toArray(children)
     return (
-      <Dropdown
-        containerRef={el => {
-          this.el = el
-        }}
-        altBackgroundRef={el => (this.altBackground = el)}
+      <DropdownRoot
+        direction={direction}
+        animatingOut={animatingOut}
+        duration={tweenConfig.duration}
       >
-        {this.props.children}
-      </Dropdown>
+        <Flipped flipId="dropdown-caret" translateX>
+          <Caret />
+        </Flipped>
+        <Flipped flipId="dropdown" translateX scaleX scaleY>
+          <DropdownBackground>
+            <Flipped inverseFlipId="dropdown" scaleX scaleY>
+              <TransformOriginTopLeft>
+                <AltBackground innerRef={el => (this.altBackgroundEl = el)} />
+                <ContentsContainer>
+                  <Flipped inverseFlipId="dropdown" translateX>
+                    <div>
+                      <FadeInContents
+                        direction={direction}
+                        duration={tweenConfig.duration}
+                        innerRef={el => (this.currentDropdownEl = el)}
+                      >
+                        {currentDropdown}
+                      </FadeInContents>
+                    </div>
+                  </Flipped>
+                  {prevDropdown && (
+                    <FadeOutContents
+                      direction={direction}
+                      duration={tweenConfig.duration}
+                      innerRef={el => (this.prevDropdownEl = el)}
+                    >
+                      {prevDropdown}
+                    </FadeOutContents>
+                  )}
+                </ContentsContainer>
+              </TransformOriginTopLeft>
+            </Flipped>
+          </DropdownBackground>
+        </Flipped>
+      </DropdownRoot>
     )
   }
 }

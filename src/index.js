@@ -18,7 +18,7 @@ const AppContainer = styled.div`
 `
 
 class App extends Component {
-  state = { duration: 500, ease: "easeOut" }
+  state = { duration: 250, ease: "easeInOut" }
 
   onChange = data => {
     this.setState(data)

@@ -1,9 +1,12 @@
 import React from "react"
 import styled from "styled-components"
-import Icon from "./Icon"
-import DropdownSection from "./DropdownSection"
-import { Heading, HeadingLink } from "./Heading"
-import LinkList from "./LinkList"
+import {
+  Icon,
+  DropdownSection,
+  Heading,
+  HeadingLink,
+  LinkList
+} from "./Components"
 
 const DevelopersDropdownEl = styled.div`
   width: 25rem;
@@ -19,10 +22,10 @@ const Flex = styled.div`
 const DevelopersDropdown = () => {
   return (
     <DevelopersDropdownEl>
-      <DropdownSection>
+      <DropdownSection data-first-dropdown-section>
         <div>
           <Heading>Documentation</Heading>
-          <p>Start integrating Stripe's products and tools</p>
+          <p>Start integrating Stripe&rsquo;s products and tools</p>
           <Flex>
             <div>
               <h4>Get Started</h4>
