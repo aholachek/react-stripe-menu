@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 import styled from "styled-components"
 
 const NavbarItemButton = styled.div`
@@ -28,6 +29,12 @@ const DropdownSlot = styled.div`
 `
 
 export default class NavbarItem extends Component {
+  static propTypes = {
+    onMouseEnter: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    children: PropTypes.node
+  }
   onMouseEnter = () => {
     this.props.onMouseEnter(this.props.index)
   }

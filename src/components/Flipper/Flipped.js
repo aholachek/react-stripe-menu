@@ -1,6 +1,17 @@
-import { Children, cloneElement} from "react"
+import { Children, cloneElement } from "react"
+import PropTypes from "prop-types"
 
-export default function Flipped({ children, flipId, ...rest }) {
+const propTypes = {
+  children: PropTypes.node.isRequired,
+  flipId: PropTypes.string,
+  inverseFlipId: PropTypes.string,
+  translateX: PropTypes.bool,
+  translateY: PropTypes.bool,
+  scaleX: PropTypes.bool,
+  scaleY: PropTypes.bool
+}
+
+function Flipped({ children, flipId, ...rest }) {
   const child = Children.only(children)
   // turn props into DOM data attributes
   const props = Object.entries(rest)
@@ -17,3 +28,7 @@ export default function Flipped({ children, flipId, ...rest }) {
   if (flipId) props["data-flip"] = flipId
   return cloneElement(child, props)
 }
+
+Flipped.propTypes = propTypes
+
+export default Flipped

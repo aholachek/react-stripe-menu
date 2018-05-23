@@ -28,7 +28,10 @@ class App extends Component {
     return (
       <AppContainer>
         <AnimatedNavbar
-          tweenConfig={{ ease: easing[this.state.ease], duration: this.state.duration }}
+          tweenConfig={{
+            ease: easing[this.state.ease],
+            duration: this.state.duration
+          }}
         />
         <DevControls
           duration={this.state.duration}

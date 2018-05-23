@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import styled from "styled-components"
 import Icon from "./Icon"
 import DropdownSection from "./DropdownSection"
@@ -103,7 +102,7 @@ const ProductsDropdown = () => {
         </SubProductsList>
         <WorksWithStripe>
           <Heading noMarginBottom>
-            <a href="#">
+            <a href="/">
               <Icon /> Works with Stripe
             </a>
           </Heading>

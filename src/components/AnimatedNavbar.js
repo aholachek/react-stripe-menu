@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import Navbar from "./Navbar"
 import NavbarItem from "./Navbar/NavbarItem"
 import Flipper from "./Flipper"
@@ -15,7 +16,17 @@ const navbarConfig = [
 ]
 
 export default class AnimatedNavbar extends Component {
-  state = { activeIndex: undefined, prevActiveIndex: undefined, animatingOut: false }
+  static propTypes = {
+    tweenConfig: PropTypes.shape({
+      duration: PropTypes.number,
+      easing: PropTypes.func
+    })
+  }
+  state = {
+    activeIndex: undefined,
+    prevActiveIndex: undefined,
+    animatingOut: false
+  }
 
   resetDropdownState = () => {
     this.setState({
@@ -31,8 +42,8 @@ export default class AnimatedNavbar extends Component {
       clearTimeout(this.pendingDropdownRemoval)
       delete this.pendingDropdownRemoval
     }
-    // set to next tick to make sure old dropdown was fully removed
-    // (setState is async)
+    // set to next tick to make sure that if there was a previous dropdown,
+    // it has been removed (setState is async)
     setTimeout(() => {
       this.setState(prevState => ({
         activeIndex: i,
@@ -58,12 +69,14 @@ export default class AnimatedNavbar extends Component {
     const { tweenConfig } = this.props
 
     let CurrentDropdown
-    if (this.state.activeIndex !== undefined ) CurrentDropdown = navbarConfig[this.state.activeIndex].dropdown
+    if (this.state.activeIndex !== undefined)
+      CurrentDropdown = navbarConfig[this.state.activeIndex].dropdown
 
     let direction
     let PrevDropdown
     if (this.state.prevActiveIndex !== undefined) {
-      direction = this.state.activeIndex > this.state.prevActiveIndex ? "forwards" : "backwards"
+      direction =
+        this.state.activeIndex > this.state.prevActiveIndex ? "right" : "left"
       PrevDropdown = navbarConfig[this.state.prevActiveIndex].dropdown
     }
 
@@ -72,14 +85,21 @@ export default class AnimatedNavbar extends Component {
         <Navbar onMouseLeave={this.onMouseLeave}>
           {navbarConfig.map((n, index) => {
             return (
-              <NavbarItem title={n.title} index={index} onMouseEnter={this.onMouseEnter}>
+              <NavbarItem
+                title={n.title}
+                index={index}
+                onMouseEnter={this.onMouseEnter}
+              >
                 {this.state.activeIndex === index && (
                   <DropdownContainer
                     direction={direction}
                     animatingOut={this.state.animatingOut}
                     tweenConfig={this.props.tweenConfig}
                   >
-                    <TransitionContents direction={direction} tweenConfig={this.props.tweenConfig}>
+                    <TransitionContents
+                      direction={direction}
+                      tweenConfig={this.props.tweenConfig}
+                    >
                       <CurrentDropdown />
                     </TransitionContents>
                     {PrevDropdown && (

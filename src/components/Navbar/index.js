@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-import NavbarItem from "./NavbarItem"
 
 const NavbarList = styled.ul`
   display: flex;

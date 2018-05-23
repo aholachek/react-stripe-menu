@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import styled from "styled-components"
 import Flipped from "../Flipper/Flipped"
 
@@ -25,8 +26,8 @@ const DropdownBackground = styled.div`
   border-radius: 4px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1), 0 15px 35px rgba(50, 50, 93, 0.15),
-    0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
+    0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
 `
 
 const AltBackground = styled.div`
@@ -39,6 +40,12 @@ const AltBackground = styled.div`
   transform-origin: 0 0;
   z-index: 0;
 `
+
+const propTypes = {
+  children: PropTypes.node.isRequired,
+  containerRef: PropTypes.func,
+  altBackgroundRef: PropTypes.func
+}
 
 const Dropdown = ({ children, containerRef, altBackgroundRef }) => {
   return (
@@ -59,5 +66,7 @@ const Dropdown = ({ children, containerRef, altBackgroundRef }) => {
     </TransformOriginTopLeft>
   )
 }
+
+Dropdown.propTypes = propTypes
 
 export default Dropdown

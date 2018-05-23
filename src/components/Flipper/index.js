@@ -1,14 +1,23 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { tween, styler } from "popmotion"
 
 const getFlipChildrenPositions = el => {
   return [...el.querySelectorAll("*[data-flip]")]
-    .map(el => [el.dataset.flip, el.getBoundingClientRect()])
+    .map(child => [child.dataset.flip, child.getBoundingClientRect()])
     .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})
 }
 
-export default class Flipper extends Component {
-  getSnapshotBeforeUpdate(prevProps, prevState) {
+class Flipper extends Component {
+  static propTypes = {
+    flipKey: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    tweenConfig: PropTypes.shape({
+      duration: PropTypes.number,
+      easing: PropTypes.func
+    })
+  }
+  getSnapshotBeforeUpdate(prevProps) {
     return {
       cachedFlipChildrenPositions: getFlipChildrenPositions(this.el)
     }
@@ -23,12 +32,15 @@ export default class Flipper extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, cachedData) {
-    if (this.props.flipKey !== undefined && this.props.flipKey !== prevProps.flipKey) {
+    if (
+      this.props.flipKey !== undefined &&
+      this.props.flipKey !== prevProps.flipKey
+    ) {
       this.animateMove(cachedData)
     }
   }
 
-  animateMove({ cachedFlipChildrenPositions, cachedContents }) {
+  animateMove({ cachedFlipChildrenPositions, foo }) {
     const newFlipChildrenPositions = getFlipChildrenPositions(this.el)
     const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
@@ -39,10 +51,14 @@ export default class Flipper extends Component {
       const el = this.el.querySelector(`*[data-flip="${id}"]`)
 
       const fromVals = { ...defaultVals }
-      if (el.dataset.translateX) fromVals.translateX = prevRect.x - currentRect.x
-      if (el.dataset.translateY) fromVals.translateY = prevRect.y - currentRect.y
-      if (el.dataset.scaleX) fromVals.scaleX = prevRect.width / currentRect.width
-      if (el.dataset.scaleY) fromVals.scaleY = prevRect.height / currentRect.height
+      if (el.dataset.translateX)
+        fromVals.translateX = prevRect.x - currentRect.x
+      if (el.dataset.translateY)
+        fromVals.translateY = prevRect.y - currentRect.y
+      if (el.dataset.scaleX)
+        fromVals.scaleX = prevRect.width / currentRect.width
+      if (el.dataset.scaleY)
+        fromVals.scaleY = prevRect.height / currentRect.height
 
       const { stop } = tween({
         from: fromVals,
@@ -50,12 +66,17 @@ export default class Flipper extends Component {
         ...this.props.tweenConfig
       }).start(({ translateX, translateY, scaleX, scaleY }) => {
         if (!this.componentIsMounted) {
-          stop()
+          stop && stop()
           return
         }
         styler(el).set({ translateX, translateY, scaleY, scaleX })
+        // if we're scaling and we have children with data-inverse-flip-ids
+        // apply the inverse of the scale so that the children don't distort
         if (el.dataset.scaleX || el.dataset.scaleY) {
-          ;[...el.querySelectorAll(`*[data-inverse-flip-id="${id}"]`)].forEach(el => {
+          const childElements = [
+            ...el.querySelectorAll(`*[data-inverse-flip-id="${id}"]`)
+          ]
+          childElements.forEach(el => {
             styler(el).set({
               scaleY: 1 / scaleY,
               scaleX: 1 / scaleX
@@ -70,3 +91,5 @@ export default class Flipper extends Component {
     return <div ref={el => (this.el = el)}>{this.props.children}</div>
   }
 }
+
+export default Flipper

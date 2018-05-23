@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import styled from "styled-components"
 import Icon from "./Icon"
 import DropdownSection from "./DropdownSection"
@@ -23,19 +22,19 @@ const DevelopersDropdown = () => {
       <DropdownSection>
         <div>
           <Heading>Documentation</Heading>
-          <p className="mb-0">Start integrating Stripe's products and tools</p>
+          <p>Start integrating Stripe's products and tools</p>
           <Flex>
             <div>
               <h4>Get Started</h4>
               <LinkList>
                 <li>
-                  <a href="#">Elements</a>
+                  <a href="/">Elements</a>
                 </li>
                 <li>
-                  <a href="#">Checkout</a>
+                  <a href="/">Checkout</a>
                 </li>
                 <li>
-                  <a href="#">Mobile apps</a>
+                  <a href="/">Mobile apps</a>
                 </li>
               </LinkList>
             </div>
@@ -43,13 +42,13 @@ const DevelopersDropdown = () => {
               <h4>Popular Topics</h4>
               <LinkList>
                 <li>
-                  <a href="#">Apple Pay</a>
+                  <a href="/">Apple Pay</a>
                 </li>
                 <li>
-                  <a href="#">Testing</a>
+                  <a href="/">Testing</a>
                 </li>
                 <li>
-                  <a href="#">Launch Checklist</a>
+                  <a href="/">Launch Checklist</a>
                 </li>
               </LinkList>
             </div>
@@ -59,17 +58,17 @@ const DevelopersDropdown = () => {
       <DropdownSection>
         <ul>
           <HeadingLink>
-            <a href="#">
+            <a href="/">
               <Icon /> Full API Reference
             </a>
           </HeadingLink>
           <HeadingLink>
-            <a href="#">
+            <a href="/">
               <Icon /> API Status
             </a>
           </HeadingLink>
           <HeadingLink noMarginBottom>
-            <a href="#">
+            <a href="/">
               <Icon /> Open Source
             </a>
           </HeadingLink>
