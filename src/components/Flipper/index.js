@@ -10,7 +10,11 @@ const getFlipChildrenPositions = el => {
 
 class Flipper extends Component {
   static propTypes = {
-    flipKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    flipKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool
+    ]),
     children: PropTypes.node.isRequired,
     tweenConfig: PropTypes.shape({
       duration: PropTypes.number,
@@ -53,7 +57,9 @@ class Flipper extends Component {
         fromVals.scaleY = prevRect.height / currentRect.height
 
       // immediately apply styles to prevent flicker
-      styler(el).set(fromVals).render()
+      styler(el)
+        .set(fromVals)
+        .render()
 
       const body = document.querySelector("body")
 

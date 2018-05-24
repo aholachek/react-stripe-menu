@@ -34,33 +34,17 @@ export default class AnimatedNavbar extends Component {
   }
 
   onMouseEnter = i => {
-    const setNewState = () =>
-      this.setState(prevState => ({
-        activeIndices: prevState.activeIndices.concat(i),
-        animatingOut: false
-      }))
-
-    if (this.pendingDropdownRemoval) {
-      this.resetDropdownState()
-      clearTimeout(this.pendingDropdownRemoval)
-      delete this.pendingDropdownRemoval
-      // wait until next tick to make sure a render happens in between
-      // and nodes arent reused
-      setTimeout(setNewState)
-    } else {
-      setNewState()
-    }
+    this.setState(prevState => ({
+      activeIndices: prevState.activeIndices.concat(i),
+      animatingOut: false
+    }))
   }
 
   onMouseLeave = () => {
-    if (this.state.animatingOut) return
     this.setState({
       animatingOut: true
     })
-    this.pendingDropdownRemoval = setTimeout(
-      this.resetDropdownState,
-      this.props.tweenConfig.duration
-    )
+    setTimeout(this.resetDropdownState, this.props.tweenConfig.duration)
   }
 
   render() {

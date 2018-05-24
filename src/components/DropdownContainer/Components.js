@@ -21,6 +21,7 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 export const DropdownRoot = TransformOriginTopLeft.extend`
   animation-name: ${getDropdownRootKeyFrame};
   animation-duration: ${props => props.duration || 250}ms;
+  animation-fill-mode: forwards;
 `
 
 export const Caret = styled.div`
@@ -57,16 +58,12 @@ export const AltBackground = styled.div`
   z-index: 0;
 `
 
-export const ContentsContainer = styled.div`
-  position: relative;
-`
-
 const getContentsInKeyframe = ({ direction }) => {
   if (!direction) return null
   return keyframes`
  from {
    opacity: 0;
-   transform: translateX(${direction === "left" ? "-80px" : "80px"});
+   transform: translateX(${direction === "left" ? "-120px" : "120px"});
  }
  to {
    opacity: 1;
@@ -89,7 +86,7 @@ const getContentsOutKeyframe = ({ direction }) => {
  }
  to {
    opacity: 0;
-   transform: translateX(${direction === "left" ? "140px" : "-140px"});
+   transform: translateX(${direction === "left" ? "100px" : "-100px"});
  }
 `
 }

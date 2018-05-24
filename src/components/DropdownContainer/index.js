@@ -6,7 +6,6 @@ import {
   Caret,
   DropdownBackground,
   AltBackground,
-  ContentsContainer,
   FadeInContents,
   FadeOutContents
 } from "./Components"
@@ -84,28 +83,22 @@ class DropdownContainer extends Component {
             <Flipped inverseFlipId="dropdown" scaleX scaleY>
               <TransformOriginTopLeft>
                 <AltBackground innerRef={el => (this.altBackgroundEl = el)} />
-                <ContentsContainer>
-                  <Flipped inverseFlipId="dropdown" translateX>
-                    <div>
-                      <FadeInContents
-                        direction={direction}
-                        duration={tweenConfig.duration}
-                        innerRef={el => (this.currentDropdownEl = el)}
-                      >
-                        {currentDropdown}
-                      </FadeInContents>
-                    </div>
-                  </Flipped>
-                  {prevDropdown && (
-                    <FadeOutContents
-                      direction={direction}
-                      duration={tweenConfig.duration}
-                      innerRef={el => (this.prevDropdownEl = el)}
-                    >
-                      {prevDropdown}
-                    </FadeOutContents>
-                  )}
-                </ContentsContainer>
+                <FadeInContents
+                  direction={direction}
+                  duration={tweenConfig.duration}
+                  innerRef={el => (this.currentDropdownEl = el)}
+                >
+                  {currentDropdown}
+                </FadeInContents>
+                {prevDropdown && (
+                  <FadeOutContents
+                    direction={direction}
+                    duration={tweenConfig.duration}
+                    innerRef={el => (this.prevDropdownEl = el)}
+                  >
+                    {prevDropdown}
+                  </FadeOutContents>
+                )}
               </TransformOriginTopLeft>
             </Flipped>
           </DropdownBackground>
