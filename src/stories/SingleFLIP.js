@@ -1,54 +1,54 @@
 import React, { Component } from "react"
-import styled from 'styled-components'
 import Flipper from "../components/Flipper"
 import Flipped from "../components/Flipper/Flipped"
-import CompanyDropdown from "../components/DropdownContents/CompanyDropdown"
+import Navbar from "../components/Navbar"
+import NavbarItem from "../components/Navbar/NavbarItem"
+import ProductsDropdown from "../components/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../components/DropdownContents/DevelopersDropdown"
 import {
-  DropdownRoot,
   TransformOriginTopLeft,
   Caret,
   DropdownBackground
 } from "../components/DropdownContainer/Components"
 
-import '../index.css'
-
 class SingleFLIP extends Component {
-  state = { company: true }
+  state = { toggled: false }
   render() {
-    const dropdownContents = this.state.company ? (
-      <CompanyDropdown />
+    const dropdownContents = this.state.toggled ? (
+      <ProductsDropdown />
     ) : (
       <DevelopersDropdown />
     )
     const dropdown = (
       <Flipped flipId="dropdown" translateX translateY scaleX scaleY>
-        <DropdownRoot>
+        <TransformOriginTopLeft>
           <Caret />
           <DropdownBackground>{dropdownContents}</DropdownBackground>
-        </DropdownRoot>
+        </TransformOriginTopLeft>
       </Flipped>
     )
-    debugger
     return (
       <div>
-        <div>
-          <button
-            onClick={() => {
-              this.setState({ company: !this.state.company })
-            }}
-          >
-            animate
-          </button>
-        </div>
-        <div>
-          <Flipper flipKey={this.state.company}>
-            <div>
-              <div>{this.state.company && dropdown}</div>
-              <div>{!this.state.company && dropdown}</div>
-            </div>
-          </Flipper>
-        </div>
+        <Flipper flipKey={this.state.toggled} duration={2500}>
+          <Navbar>
+            <NavbarItem
+              title="Initial position"
+              onMouseEnter={() => {
+                this.setState({ toggled: false })
+              }}
+            >
+              {!this.state.toggled && dropdown}
+            </NavbarItem>
+            <NavbarItem
+              title="Toggled position"
+              onMouseEnter={() => {
+                this.setState({ toggled: true })
+              }}
+            >
+              {this.state.toggled && dropdown}
+            </NavbarItem>
+          </Navbar>
+        </Flipper>
       </div>
     )
   }

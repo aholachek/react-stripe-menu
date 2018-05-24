@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build; yarn build-storybook; mv storybook-static/ build/storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
@@ -22,12 +22,12 @@
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0",
-    "@storybook/react": "^3.4.5",
     "@storybook/addon-actions": "^3.4.5",
     "@storybook/addon-links": "^3.4.5",
     "@storybook/addons": "^3.4.5",
+    "@storybook/react": "^3.4.5",
     "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "gh-pages": "^1.1.0"
   }
 }

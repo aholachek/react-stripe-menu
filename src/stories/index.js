@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react"
+import { storiesOf } from "@storybook/react"
 
-import { storiesOf } from '@storybook/react';
+import GranularFLIP from "./GranularFLIP"
+import SingleFLIP from "./SingleFLIP"
 
-import GranularFLIP from './GranularFLIP'
-import SingleFLIP from './SingleFLIP'
+import "../index.css"
+import "./styles.css"
 
-storiesOf('FLIP examples', module)
-  .add('Single FLIP', () => <SingleFLIP/>)
-  .add('Granular FLIP', () => (<GranularFLIP/>));
+const stories = storiesOf("FLIP examples", module)
+
+stories
+  .add("Single FLIP", () => <SingleFLIP />)
+  .add("Granular FLIP", () => <GranularFLIP />)

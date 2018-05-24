@@ -34,6 +34,9 @@ export default class AnimatedNavbar extends Component {
   }
 
   onMouseEnter = i => {
+    if (this.state.activeIndices[this.state.activeIndices.length - 1] === i) {
+      return
+    }
     this.setState(prevState => ({
       activeIndices: prevState.activeIndices.concat(i),
       animatingOut: false
@@ -69,7 +72,7 @@ export default class AnimatedNavbar extends Component {
     }
 
     return (
-      <Flipper flipKey={currentIndex} tweenConfig={tweenConfig}>
+      <Flipper flipKey={currentIndex} {...tweenConfig}>
         <Navbar onMouseLeave={this.onMouseLeave}>
           {navbarConfig.map((n, index) => {
             return (

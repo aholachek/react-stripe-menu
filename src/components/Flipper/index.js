@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { tween, styler } from "popmotion"
+import { tween, styler, easing } from "popmotion"
 
 const getFlipChildrenPositions = el => {
   return [...el.querySelectorAll("*[data-flip]")]
@@ -16,11 +16,15 @@ class Flipper extends Component {
       PropTypes.bool
     ]),
     children: PropTypes.node.isRequired,
-    tweenConfig: PropTypes.shape({
-      duration: PropTypes.number,
-      easing: PropTypes.func
-    })
+    duration: PropTypes.number,
+    easing: PropTypes.func
   }
+
+  static defaultProps = {
+    duration: 250,
+    easing: easing.easeOut
+  }
+
   getSnapshotBeforeUpdate(prevProps) {
     return {
       cachedFlipChildrenPositions: getFlipChildrenPositions(this.el)
@@ -66,13 +70,15 @@ class Flipper extends Component {
       const { stop } = tween({
         from: fromVals,
         to: defaultVals,
-        ...this.props.tweenConfig
+        duration: this.props.duration,
+        easing: this.props.easing
       }).start(({ translateX, translateY, scaleX, scaleY }) => {
         if (!body.contains(el)) {
           stop && stop()
           return
         }
         styler(el).set({ translateX, translateY, scaleY, scaleX })
+        console.log("styler is setting", translateX, translateY, scaleY, scaleX)
 
         // if we're scaling and we have children with data-inverse-flip-ids
         // apply the inverse of the scale so that the children don't distort
