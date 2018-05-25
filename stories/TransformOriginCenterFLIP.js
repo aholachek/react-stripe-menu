@@ -5,15 +5,20 @@ import Flipped from "../src/Flipper/Flipped"
 import NavbarItem from "../src/Navbar/NavbarItem"
 import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
-import {
-  Caret,
-  DropdownBackground
-} from "../src/DropdownContainer/Components"
+import { Caret, DropdownBackground } from "../src/DropdownContainer/Components"
 
 const Navbar = styled.ul`
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+`
+const FakeDropdownBackground = styled.div`
+  background-color: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
+    0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
 `
 
 class TransformOriginCenterFLIP extends Component {
@@ -31,11 +36,11 @@ class TransformOriginCenterFLIP extends Component {
           <Caret />
         </Flipped>
         <Flipped flipId="dropdown" translateX scaleX scaleY>
-          <DropdownBackground>
+          <FakeDropdownBackground>
             <Flipped inverseFlipId="dropdown" scaleX scaleY>
               <div>{dropdownContents}</div>
             </Flipped>
-          </DropdownBackground>
+          </FakeDropdownBackground>
         </Flipped>
       </div>
     )
