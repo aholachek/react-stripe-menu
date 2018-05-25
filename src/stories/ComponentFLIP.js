@@ -1,7 +1,7 @@
 import React, { Component } from "react"
+import styled from "styled-components"
 import Flipper from "../components/Flipper"
 import Flipped from "../components/Flipper/Flipped"
-import Navbar from "../components/Navbar"
 import NavbarItem from "../components/Navbar/NavbarItem"
 import ProductsDropdown from "../components/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../components/DropdownContents/DevelopersDropdown"
@@ -11,7 +11,13 @@ import {
   DropdownBackground
 } from "../components/DropdownContainer/Components"
 
-class GranularFLIP extends Component {
+const Navbar = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+`
+
+class ComponentFLIP extends Component {
   state = { toggled: false }
 
   render() {
@@ -63,4 +69,4 @@ class GranularFLIP extends Component {
   }
 }
 
-export default GranularFLIP
+export default ComponentFLIP
