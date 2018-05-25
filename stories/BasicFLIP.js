@@ -1,14 +1,15 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-import Flipper from "../components/Flipper"
-import Flipped from "../components/Flipper/Flipped"
-import NavbarItem from "../components/Navbar/NavbarItem"
-import ProductsDropdown from "../components/DropdownContents/ProductsDropdown"
-import DevelopersDropdown from "../components/DropdownContents/DevelopersDropdown"
+import Flipper from "../src/Flipper"
+import Flipped from "../src/Flipper/Flipped"
+import NavbarItem from "../src/Navbar/NavbarItem"
+import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
+import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
 import {
+  TransformOriginTopLeft,
   Caret,
   DropdownBackground
-} from "../components/DropdownContainer/Components"
+} from "../src/DropdownContainer/Components"
 
 const Navbar = styled.ul`
   display: flex;
@@ -16,9 +17,8 @@ const Navbar = styled.ul`
   list-style-type: none;
 `
 
-class TransformOriginCenterFLIP extends Component {
+class BasicFLIP extends Component {
   state = { toggled: false }
-
   render() {
     const dropdownContents = this.state.toggled ? (
       <ProductsDropdown />
@@ -26,18 +26,12 @@ class TransformOriginCenterFLIP extends Component {
       <DevelopersDropdown />
     )
     const dropdown = (
-      <div>
-        <Flipped flipId="dropdown-caret" translateX>
+      <Flipped flipId="dropdown" translateX translateY scaleX scaleY>
+        <TransformOriginTopLeft>
           <Caret />
-        </Flipped>
-        <Flipped flipId="dropdown" translateX scaleX scaleY>
-          <DropdownBackground>
-            <Flipped inverseFlipId="dropdown" scaleX scaleY>
-              <div>{dropdownContents}</div>
-            </Flipped>
-          </DropdownBackground>
-        </Flipped>
-      </div>
+          <DropdownBackground>{dropdownContents}</DropdownBackground>
+        </TransformOriginTopLeft>
+      </Flipped>
     )
     return (
       <div>
@@ -66,4 +60,4 @@ class TransformOriginCenterFLIP extends Component {
   }
 }
 
-export default TransformOriginCenterFLIP
+export default BasicFLIP

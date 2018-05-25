@@ -1,15 +1,15 @@
 import React, { Component } from "react"
-import styled from "styled-components"
-import Flipper from "../components/Flipper"
-import Flipped from "../components/Flipper/Flipped"
-import NavbarItem from "../components/Navbar/NavbarItem"
-import ProductsDropdown from "../components/DropdownContents/ProductsDropdown"
-import DevelopersDropdown from "../components/DropdownContents/DevelopersDropdown"
+import styled from 'styled-components'
+import Flipper from "../src/Flipper"
+import Flipped from "../src/Flipper/Flipped"
+import NavbarItem from "../src/Navbar/NavbarItem"
+import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
+import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
 import {
   TransformOriginTopLeft,
   Caret,
   DropdownBackground
-} from "../components/DropdownContainer/Components"
+} from "../src/DropdownContainer/Components"
 
 const Navbar = styled.ul`
   display: flex;
@@ -17,7 +17,7 @@ const Navbar = styled.ul`
   list-style-type: none;
 `
 
-class BasicFLIP extends Component {
+class InvertedChildFLIP extends Component {
   state = { toggled: false }
   render() {
     const dropdownContents = this.state.toggled ? (
@@ -29,7 +29,13 @@ class BasicFLIP extends Component {
       <Flipped flipId="dropdown" translateX translateY scaleX scaleY>
         <TransformOriginTopLeft>
           <Caret />
-          <DropdownBackground>{dropdownContents}</DropdownBackground>
+          <DropdownBackground>
+            <Flipped inverseFlipId="dropdown" scaleX scaleY>
+              <TransformOriginTopLeft>
+                {dropdownContents}
+              </TransformOriginTopLeft>
+            </Flipped>
+          </DropdownBackground>
         </TransformOriginTopLeft>
       </Flipped>
     )
@@ -60,4 +66,4 @@ class BasicFLIP extends Component {
   }
 }
 
-export default BasicFLIP
+export default InvertedChildFLIP

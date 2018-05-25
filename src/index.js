@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
 import { easing } from "popmotion"
-import AnimatedNavbar from "./components/AnimatedNavbar"
-import DevControls from "./components/DevControls"
+import AnimatedNavbar from "./AnimatedNavbar"
+import DemoControls from "./DemoControls"
 import styled from "styled-components"
 import "./index.css"
 
@@ -33,7 +33,7 @@ class App extends Component {
             duration: this.state.duration
           }}
         />
-        <DevControls
+        <DemoControls
           duration={this.state.duration}
           onChange={this.onChange}
           ease={this.state.ease}

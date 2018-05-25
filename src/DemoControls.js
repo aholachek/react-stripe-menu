@@ -30,7 +30,7 @@ const Form = styled.form`
   }
 `
 
-class DevControls extends Component {
+class DemoControls extends Component {
   static propTypes = {
     duration: PropTypes.number,
     ease: PropTypes.string
@@ -77,4 +77,4 @@ class DevControls extends Component {
   }
 }
 
-export default DevControls
+export default DemoControls

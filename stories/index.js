@@ -7,7 +7,7 @@ import InvertedChildFLIP from "./InvertedChildFLIP"
 import ComponentFLIP from "./ComponentFLIP"
 import TransformOriginCenterFLIP from "./TransformOriginCenterFLIP"
 
-import "../index.css"
+import "../src/index.css"
 import "./styles.css"
 
 const Description = styled.div`

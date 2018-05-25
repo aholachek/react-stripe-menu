@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-import Flipper from "../components/Flipper"
-import Flipped from "../components/Flipper/Flipped"
-import NavbarItem from "../components/Navbar/NavbarItem"
-import ProductsDropdown from "../components/DropdownContents/ProductsDropdown"
-import DevelopersDropdown from "../components/DropdownContents/DevelopersDropdown"
+import Flipper from "../src/Flipper"
+import Flipped from "../src/Flipper/Flipped"
+import NavbarItem from "../src/Navbar/NavbarItem"
+import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
+import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
 import {
   TransformOriginTopLeft,
   Caret,
   DropdownBackground
-} from "../components/DropdownContainer/Components"
+} from "../src/DropdownContainer/Components"
 
 const Navbar = styled.ul`
   display: flex;

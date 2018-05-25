@@ -40,7 +40,7 @@ class Flipper extends Component {
     }
   }
 
-  animateMove({ cachedFlipChildrenPositions, foo }) {
+  animateMove({ cachedFlipChildrenPositions }) {
     const newFlipChildrenPositions = getFlipChildrenPositions(this.el)
     const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
@@ -51,6 +51,8 @@ class Flipper extends Component {
       const el = this.el.querySelector(`*[data-flip="${id}"]`)
 
       const fromVals = { ...defaultVals }
+      // we're only going to animate the values that the child wants animated,
+      // based on its data-* attributes
       if (el.dataset.translateX)
         fromVals.translateX = prevRect.x - currentRect.x
       if (el.dataset.translateY)
@@ -60,7 +62,7 @@ class Flipper extends Component {
       if (el.dataset.scaleY)
         fromVals.scaleY = prevRect.height / currentRect.height
 
-      // immediately apply styles to prevent flicker
+      // before animating, immediately apply FLIP styles to prevent flicker
       styler(el)
         .set(fromVals)
         .render()
@@ -73,14 +75,18 @@ class Flipper extends Component {
         duration: this.props.duration,
         easing: this.props.easing
       }).start(({ translateX, translateY, scaleX, scaleY }) => {
+
+        // just to be safe: if the whole component has been removed from the DOM
+        // (e.g. if the current page changed), let's immediately cancel
+        // any in-progress animations
         if (!body.contains(el)) {
           stop && stop()
           return
         }
+        // set the appropriate values for this tick of the animation
         styler(el).set({ translateX, translateY, scaleY, scaleX })
-        console.log("styler is setting", translateX, translateY, scaleY, scaleX)
 
-        // if we're scaling and we have children with data-inverse-flip-ids
+        // if we're scaling and we have children with data-inverse-flip-ids,
         // apply the inverse of the scale so that the children don't distort
 
         const childElements = [
