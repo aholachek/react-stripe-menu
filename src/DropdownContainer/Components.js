@@ -20,7 +20,7 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 
 export const DropdownRoot = TransformOriginTopLeft.extend`
   animation-name: ${getDropdownRootKeyFrame};
-  animation-duration: ${props => props.duration || 250}ms;
+  animation-duration: ${props => props.duration}ms;
   animation-fill-mode: forwards;
 `
 
@@ -74,7 +74,7 @@ const getContentsInKeyframe = ({ direction }) => {
 
 export const FadeInContents = styled.div`
   animation-name: ${getContentsInKeyframe};
-  animation-duration: ${props => props.duration || 250}ms;
+  animation-duration: ${props => props.duration}ms;
 `
 
 const getContentsOutKeyframe = ({ direction }) => {
@@ -97,6 +97,6 @@ export const FadeOutContents = styled.div`
   left: 0;
   z-index: 0;
   animation-name: ${getContentsOutKeyframe};
-  animation-duration: ${props => props.duration || 250}ms;
+  animation-duration: ${props => props.duration}ms;
   animation-fill-mode: forwards;
 `

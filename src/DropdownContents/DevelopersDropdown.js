@@ -15,7 +15,7 @@ const DevelopersDropdownEl = styled.div`
 const Flex = styled.div`
   display: flex;
   > div:first-of-type {
-    margin-right: 3.2rem;
+    margin-right: 48px;
   }
 `
 

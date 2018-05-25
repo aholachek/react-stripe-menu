@@ -40,9 +40,7 @@ const updateAltBackground = ({
   } else {
     // just immediately set the background to the appropriate height
     // since we don't have a stored value
-    styler(altBackground)
-      .set({ translateY: currentHeight })
-      .render()
+    styler(altBackground).set({ translateY: currentHeight })
   }
 }
 

@@ -24,11 +24,11 @@ export const LinkList = styled.ul`
 `
 
 export const Icon = styled.div`
-  width: 0.8rem;
-  height: 0.8rem;
-  margin-right: 0.75rem;
+  width: 13px;
+  height: 13px;
+  margin-right: 13px;
   background-color: var(--blue);
-  opacity: 0.7;
+  opacity: 0.8;
   display: inline-block;
 `
 

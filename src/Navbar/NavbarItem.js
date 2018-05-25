@@ -5,7 +5,7 @@ import styled from "styled-components"
 const NavbarItemButton = styled.div`
   font-weight: bold;
   font-size: 18px;
-  padding: 2rem;
+  padding: 3rem;
   color: white;
   display: flex;
   justify-content: center;

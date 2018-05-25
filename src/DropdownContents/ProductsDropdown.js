@@ -7,9 +7,9 @@ const ProductsDropdownEl = styled.div`
 `
 
 const Logo = styled.div`
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-right: 1rem;
+  width: 38px;
+  height: 38px;
+  margin-right: 16px;
   border-radius: 100%;
   opacity: 0.6;
   background-color: ${({ color }) => `var(--${color})`};
@@ -41,8 +41,8 @@ const WorksWithStripe = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.8rem;
-  padding-top: 1.8rem;
+  margin-top: var(--spacer);
+  padding-top: var(--spacer);
 }
 h3 {
   margin-bottom: 0;

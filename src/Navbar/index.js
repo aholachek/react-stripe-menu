@@ -1,21 +1,24 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 
+const NavbarEl = styled.nav`
+  max-width: 35rem;
+  margin: auto;
+`
+
 const NavbarList = styled.ul`
   display: flex;
   list-style: none;
-  max-width: 35rem;
-  margin: auto;
-  padding: 1rem;
+  margin: 0;
 `
 
 class Navbar extends Component {
   render() {
     const { children, onMouseLeave } = this.props
     return (
-      <nav onMouseLeave={onMouseLeave}>
+      <NavbarEl onMouseLeave={onMouseLeave}>
         <NavbarList>{children}</NavbarList>
-      </nav>
+      </NavbarEl>
     )
   }
 }
