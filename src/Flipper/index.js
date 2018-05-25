@@ -17,12 +17,12 @@ class Flipper extends Component {
     ]),
     children: PropTypes.node.isRequired,
     duration: PropTypes.number,
-    easing: PropTypes.func
+    ease: PropTypes.func
   }
 
   static defaultProps = {
     duration: 250,
-    easing: easing.easeOut
+    ease: easing.easeOut
   }
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -73,7 +73,7 @@ class Flipper extends Component {
         from: fromVals,
         to: defaultVals,
         duration: this.props.duration,
-        easing: this.props.easing
+        ease: this.props.ease
       }).start(({ translateX, translateY, scaleX, scaleY }) => {
 
         // just to be safe: if the whole component has been removed from the DOM

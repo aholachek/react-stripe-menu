@@ -62,7 +62,7 @@ class DemoControls extends Component {
           </fieldset>
           <fieldset key="easing">
             <legend>Easing:</legend>
-            {["linear", "easeInOut", "backOut"].map(e => {
+            {["linear", "easeInOut", "easeOut", "backOut"].map(e => {
               return (
                 <label key={e}>
                   <input type="radio" name="ease" value={e} checked={ease === e} />
