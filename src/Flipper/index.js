@@ -25,6 +25,7 @@ class Flipper extends Component {
     if (prevProps.flipKey !== this.props.flipKey) {
       return getFlippedElementPositions(this.el)
     }
+    return null
   }
 
   componentDidUpdate(prevProps, prevState, cachedFlipChildrenPositions) {

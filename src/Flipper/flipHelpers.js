@@ -63,6 +63,8 @@ export const animateMove = ({
       immediate: true
     })
 
+    debugger
+
     // now start the animation
     const { stop } = tween({
       from: fromVals,
