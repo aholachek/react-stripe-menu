@@ -10,7 +10,7 @@ const propTypes = {
   scaleX: PropTypes.bool,
   scaleY: PropTypes.bool
 }
-
+// This wrapper creates child components for the main Flipper component
 function Flipped({ children, flipId, ...rest }) {
   const child = Children.only(children)
   // turn props into DOM data attributes

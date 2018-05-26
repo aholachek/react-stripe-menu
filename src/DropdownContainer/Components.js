@@ -77,7 +77,7 @@ export const FadeInContents = styled.div`
   animation-duration: ${props => props.duration}ms;
 `
 
-const getContentsOutKeyframe = ({ direction }) => {
+const getFadeOutContentsKeyframe = ({ direction }) => {
   if (!direction) return null
   return keyframes`
  from {
@@ -96,7 +96,7 @@ export const FadeOutContents = styled.div`
   top: 0;
   left: 0;
   z-index: 0;
-  animation-name: ${getContentsOutKeyframe};
+  animation: ${getFadeOutContentsKeyframe};
   animation-duration: ${props => props.duration}ms;
   animation-fill-mode: forwards;
 `
