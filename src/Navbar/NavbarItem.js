@@ -5,11 +5,15 @@ import styled from "styled-components"
 const NavbarItemButton = styled.div`
   font-weight: bold;
   font-size: 18px;
-  padding: 3rem;
+  padding: 3rem 3rem 2rem 3rem;
   color: white;
   display: flex;
   justify-content: center;
+  transition: opacity 250ms;
   cursor: pointer;
+  &:hover {
+    opacity: .7;
+  }
 `
 
 const NavbarItemEl = styled.li`
