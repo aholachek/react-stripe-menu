@@ -13,7 +13,7 @@ const Navbar = styled.ul`
   list-style-type: none;
 `
 const FakeDropdownBackground = styled.div`
-  background-color: var(--white);
+  background-color: #fff;
   border-radius: 4px;
   overflow: hidden;
   position: relative;

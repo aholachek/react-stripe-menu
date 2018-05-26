@@ -40,6 +40,7 @@ export const animateMove = ({
   const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
   Object.keys(newFlipChildrenPositions).forEach(id => {
+
     const prevRect = cachedFlipChildrenPositions[id]
     const currentRect = newFlipChildrenPositions[id]
     if (!prevRect || !currentRect) return
@@ -48,8 +49,8 @@ export const animateMove = ({
     const fromVals = { ...defaultVals }
     // we're only going to animate the values that the child wants animated,
     // based on its data-* attributes
-    if (el.dataset.translateX) fromVals.translateX = prevRect.x - currentRect.x
-    if (el.dataset.translateY) fromVals.translateY = prevRect.y - currentRect.y
+    if (el.dataset.translateX) fromVals.translateX = prevRect.left - currentRect.left
+    if (el.dataset.translateY) fromVals.translateY = prevRect.top - currentRect.top
     if (el.dataset.scaleX) fromVals.scaleX = prevRect.width / currentRect.width
     if (el.dataset.scaleY)
       fromVals.scaleY = prevRect.height / currentRect.height
@@ -62,8 +63,6 @@ export const animateMove = ({
     invertTransformsForChildren(getInvertedChildren(el, id), fromVals, {
       immediate: true
     })
-
-    debugger
 
     // now start the animation
     const { stop } = tween({

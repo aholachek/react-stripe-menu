@@ -1,3 +1,9 @@
+// polyfill es6/es7 methods
+import "core-js/fn/object/entries"
+import "core-js/fn/array/from"
+// ponyfill CSS vars
+import cssVars from "css-vars-ponyfill"
+
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
 import { easing } from "popmotion"
@@ -6,14 +12,16 @@ import DemoControls from "./DemoControls"
 import styled from "styled-components"
 import "./index.css"
 
+cssVars()
+
 const AppContainer = styled.div`
-  background: linear-gradient(150deg,#53f 15%,#05d5ff);
+  background: linear-gradient(150deg, #53f 15%, #05d5ff);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
   > div:first-of-type {
-    flex: 1 0 auto;
+    flex: 1 0 70vh;
   }
 `
 
@@ -28,7 +36,10 @@ class App extends Component {
     const hasDurationQuery = /duration=\d+/.test(window.location.search)
     if (hasDurationQuery) {
       this.setState({
-        duration: parseInt(window.location.search.match(/duration=(\d+)/)[1], 10)
+        duration: parseInt(
+          window.location.search.match(/duration=(\d+)/)[1],
+          10
+        )
       })
     }
   }

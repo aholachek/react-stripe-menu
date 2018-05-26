@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 const propTypes = {
   children: PropTypes.node.isRequired,
-  flipId: PropTypes.string.isRequired,
+  flipId: PropTypes.string,
   inverseFlipId: PropTypes.string,
   translateX: PropTypes.bool,
   translateY: PropTypes.bool,

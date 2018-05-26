@@ -37,7 +37,7 @@ const ProductsSection = styled.ul`
 `
 
 const WorksWithStripe = styled.div`
- border-top: 2px solid var(--white);
+ border-top: 2px solid #fff;
   display:flex;
   justify-content: center;
   align-items: center;

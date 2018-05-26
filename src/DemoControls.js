@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 const Form = styled.form`
   padding: 2.5rem 0;
-  background-color: var(--white);
+  background-color: #fff;
 
   > div {
     max-width: 925px;
@@ -20,7 +20,7 @@ const Form = styled.form`
 
   legend {
     font-weight: bold;
-    display: inline-block;
+    display: block;
   }
   input {
     margin-right: 0.5rem;

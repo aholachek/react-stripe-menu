@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "core-js": "^2.5.7",
+    "css-vars-ponyfill": "^1.7.2",
     "normalize.css": "^8.0.0",
     "popmotion": "^8.1.22",
     "react": "^16.3.2",
