@@ -5,10 +5,9 @@ import {
   TransformOriginTopLeft,
   Caret,
   DropdownBackground,
-  AltBackground,
-  FadeInContents,
-  FadeOutContents
+  AltBackground
 } from "./Components"
+import FadeContents from "./FadeContents"
 import Flipped from "../Flipper/Flipped"
 import { tween, styler } from "popmotion"
 
@@ -81,21 +80,22 @@ class DropdownContainer extends Component {
             <Flipped inverseFlipId="dropdown" scaleX scaleY>
               <TransformOriginTopLeft>
                 <AltBackground innerRef={el => (this.altBackgroundEl = el)} />
-                <FadeInContents
+                <FadeContents
                   direction={direction}
                   duration={tweenConfig.duration}
                   innerRef={el => (this.currentDropdownEl = el)}
                 >
                   {currentDropdown}
-                </FadeInContents>
+                </FadeContents>
                 {prevDropdown && (
-                  <FadeOutContents
+                  <FadeContents
+                    animatingOut
                     direction={direction}
                     duration={tweenConfig.duration}
                     innerRef={el => (this.prevDropdownEl = el)}
                   >
                     {prevDropdown}
-                  </FadeOutContents>
+                  </FadeContents>
                 )}
               </TransformOriginTopLeft>
             </Flipped>
