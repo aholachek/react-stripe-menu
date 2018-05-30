@@ -29,12 +29,16 @@ class FadeContents extends Component {
       opacity: animatingOut ? 0 : 1,
       translateX: !animatingOut ? 0 : direction === "left" ? -100 : 100
     }
-    tween({
+    const { stop } = tween({
       from,
       to,
       duration
     }).start(transforms => {
-      this.el && styler(this.el).set(transforms)
+      if (!this.el) {
+        stop && stop()
+        return
+      }
+      styler(this.el).set(transforms)
     })
   }
 
