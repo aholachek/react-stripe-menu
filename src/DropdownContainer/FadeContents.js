@@ -5,6 +5,7 @@ import { tween, styler } from "popmotion"
 
 const FadeContainer = styled.div`
   position: ${props => (props.animatingOut ? "absolute" : "relative")};
+  opacity: ${props => (props.direction && !props.animatingOut ? 0 : 1)};
   top: 0;
   left: 0;
 `
@@ -43,10 +44,12 @@ class FadeContents extends Component {
   }
 
   render() {
-    const { children, animatingOut, innerRef } = this.props
+    const { children, animatingOut, innerRef, direction } = this.props
     return (
       <FadeContainer
         animatingOut={animatingOut}
+        direction={direction}
+        initialOpacity={!animatingOut && direction ? 0 : 1}
         innerRef={el => {
           this.el = el
           innerRef(el)
