@@ -23,15 +23,18 @@ class Flipper extends Component {
   }
 
   componentDidMount() {
-    const onFlip = animateMove({
+    this.flipping = new Flipping({
+      parent: this.el,
+      onFlip: this.onFlip
+    })
+  }
+
+  onFlip = flippedElements => {
+    animateMove({
+      flippedElements,
       containerEl: this.el,
       duration: this.props.duration,
       ease: this.props.ease
-    })
-
-    this.flipping = new Flipping({
-      parent: this.el,
-      onFlip
     })
   }
 

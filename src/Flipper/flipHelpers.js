@@ -24,10 +24,11 @@ const invertTransformsForChildren = (
 }
 
 export const animateMove = ({
+  flippedElements,
   containerEl,
   duration,
   ease
-}) => flippedElements => {
+}) => {
   const body = document.querySelector("body")
   const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
