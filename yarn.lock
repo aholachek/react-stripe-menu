@@ -3642,6 +3642,13 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+flipping@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/flipping/-/flipping-1.0.0.tgz#852318379e504a8be5aeba912389751cae2fa6ca"
+  dependencies:
+    mitt "^1.1.3"
+    rematrix "^0.1.3"
+
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
@@ -5624,6 +5631,10 @@ mississippi@^2.0.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
+mitt@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-1.1.3.tgz#528c506238a05dce11cd914a741ea2cc332da9b8"
+
 mixin-deep@^1.2.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.1.tgz#a49e7268dce1a0d9698e45326c5626df3543d0fe"
@@ -7173,6 +7184,10 @@ regjsparser@^0.1.4:
 relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
+
+rematrix@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/rematrix/-/rematrix-0.1.3.tgz#0fd9477a9c1774e86595808f56cf2b122f1786c3"
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

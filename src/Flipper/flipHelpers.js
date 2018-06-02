@@ -23,44 +23,31 @@ const invertTransformsForChildren = (
   })
 }
 
-export const getFlippedElementPositions = el => {
-  return [...el.querySelectorAll("*[data-flip]")]
-    .map(child => [child.dataset.flip, child.getBoundingClientRect()])
-    .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})
-}
-
 export const animateMove = ({
   containerEl,
-  cachedFlipChildrenPositions,
   duration,
   ease
-}) => {
+}) => flippedElements => {
   const body = document.querySelector("body")
-  const newFlipChildrenPositions = getFlippedElementPositions(containerEl)
   const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
-  Object.keys(newFlipChildrenPositions).forEach(id => {
-
-    const prevRect = cachedFlipChildrenPositions[id]
-    const currentRect = newFlipChildrenPositions[id]
-    if (!prevRect || !currentRect) return
-    const el = containerEl.querySelector(`*[data-flip="${id}"]`)
+  Object.keys(flippedElements).forEach(id => {
+    const { element, delta } = flippedElements[id]
 
     const fromVals = { ...defaultVals }
     // we're only going to animate the values that the child wants animated,
     // based on its data-* attributes
-    if (el.dataset.translateX) fromVals.translateX = prevRect.left - currentRect.left
-    if (el.dataset.translateY) fromVals.translateY = prevRect.top - currentRect.top
-    if (el.dataset.scaleX) fromVals.scaleX = prevRect.width / currentRect.width
-    if (el.dataset.scaleY)
-      fromVals.scaleY = prevRect.height / currentRect.height
+    if (element.dataset.translateX) fromVals.translateX = delta.left
+    if (element.dataset.translateY) fromVals.translateY = delta.top
+    if (element.dataset.scaleX) fromVals.scaleX = delta.width
+    if (element.dataset.scaleY) fromVals.scaleY = delta.height
 
     // before animating, immediately apply FLIP styles to prevent flicker
     // (which was only detectable on Safari)
-    styler(el)
+    styler(element)
       .set(fromVals)
       .render()
-    invertTransformsForChildren(getInvertedChildren(el, id), fromVals, {
+    invertTransformsForChildren(getInvertedChildren(element, id), fromVals, {
       immediate: true
     })
 
@@ -73,13 +60,13 @@ export const animateMove = ({
     }).start(transforms => {
       // just to be safe: if the component has been removed from the DOM
       // immediately cancel any in-progress animations
-      if (!body.contains(el)) {
+      if (!body.contains(element)) {
         stop && stop()
         return
       }
-      styler(el).set(transforms)
+      styler(element).set(transforms)
       // for children that requested it, cancel out the transform by applying the inverse transform
-      invertTransformsForChildren(getInvertedChildren(el, id), transforms)
+      invertTransformsForChildren(getInvertedChildren(element, id), transforms)
     })
   })
 }

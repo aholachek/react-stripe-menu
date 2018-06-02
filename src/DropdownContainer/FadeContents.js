@@ -13,7 +13,7 @@ const FadeContainer = styled.div`
 class FadeContents extends Component {
   static propTypes = {
     duration: PropTypes.number,
-    direction: PropTypes.oneOfType(["right", "left"]),
+    direction: PropTypes.oneOf(["right", "left"]),
     animatingOut: PropTypes.bool,
     children: PropTypes.node,
     innerRef: PropTypes.func

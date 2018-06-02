@@ -25,7 +25,7 @@ function Flipped({ children, flipId, ...rest }) {
     ])
     .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})
 
-  if (flipId) props["data-flip"] = flipId
+  if (flipId) props["data-flip-key"] = flipId
   return cloneElement(child, props)
 }
 
