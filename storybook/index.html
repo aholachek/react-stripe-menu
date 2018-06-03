@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="storybook-version" content="3.4.5">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <title>Storybook</title>
+    <style>
+        /*
+          When resizing panels, the drag event breaks if the cursor
+          moves over the iframe. Add the 'dragging' class to the body
+          at drag start and remove it when the drag ends.
+         */
+        .dragging iframe {
+            pointer-events: none;
+        }
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Stripe Menu</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
+        /* Styling the fuzzy search box placeholders */
+        .searchBox::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: #ddd;
+            font-size: 16px;
+        }
+
+        .searchBox::-moz-placeholder { /* Firefox 19+ */
+            color: #ddd;
+            font-size: 16px;
+        }
+
+        .searchBox:focus{
+            border-color: #EEE !important;
+        }
+
+        .btn:hover{
+            background-color: #eee
+        }
+    </style>
+    
+
+</head>
+<body style="margin: 0;">
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<script type="text/javascript" src="static/manager.3698d6a57f313e15894d.bundle.js"></script></body>
 </html>
