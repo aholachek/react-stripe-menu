@@ -1,23 +1,21 @@
 import { tween, styler } from "popmotion"
 
 const getInvertedChildren = (el, id) => [
-  ...el.querySelectorAll(`*[data-inverse-flip-id="${id}"]`)
+  ...el.querySelectorAll(`*[data-inverse-flip-key="${id}"]`)
 ]
 
-// if we're scaling an element and we have element children with data-inverse-flip-ids,
+// if we're scaling an element and we have element children with data-inverse-flip-keys,
 // apply the inverse of the transforms so that the children don't distort
 const invertTransformsForChildren = (
   childElements,
-  { translateX, translateY, scaleY, scaleX },
+  { scaleY, scaleX },
   options = {}
 ) => {
+  const inverseVals = {
+    scaleX: 1 / scaleX,
+    scaleY: 1 / scaleY
+  }
   childElements.forEach(child => {
-    const inverseVals = {}
-    if (child.dataset.translateX) inverseVals.translateX = -translateX
-    if (child.dataset.translateY) inverseVals.translateY = -translateY
-    if (child.dataset.scaleX) inverseVals.scaleX = 1 / scaleX
-    if (child.dataset.scaleY) inverseVals.scaleY = 1 / scaleY
-
     const setter = styler(child).set(inverseVals)
     if (options.immediate) setter.render()
   })
@@ -30,7 +28,6 @@ export const animateMove = ({
   ease
 }) => {
   const body = document.querySelector("body")
-  const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
   Object.keys(flippedElements).forEach(id => {
     const { element, delta, type } = flippedElements[id]
@@ -41,13 +38,12 @@ export const animateMove = ({
     // we'll use this styler to actually apply the animated values
     const elStyler = styler(element)
 
-    const fromVals = { ...defaultVals }
-    // we're only going to animate the values that the child has requested to be animated,
-    // based on its data-* attributes
-    if (element.dataset.translateX) fromVals.translateX = delta.left
-    if (element.dataset.translateY) fromVals.translateY = delta.top
-    if (element.dataset.scaleX) fromVals.scaleX = delta.width
-    if (element.dataset.scaleY) fromVals.scaleY = delta.height
+    const fromVals = {
+      translateX: delta.left,
+      translateY: delta.top,
+      scaleX: delta.width,
+      scaleY: delta.height
+    }
 
     // before animating, immediately apply FLIP styles to prevent possibility of flicker
     elStyler.set(fromVals).render()
@@ -63,7 +59,7 @@ export const animateMove = ({
     // "transforms" is an object like: { translateX, translateY, scaleX, scaleY }
     const { stop } = tween({
       from: fromVals,
-      to: defaultVals,
+      to: { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 },
       duration,
       ease
     }).start(transforms => {

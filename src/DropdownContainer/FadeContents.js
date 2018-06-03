@@ -36,7 +36,7 @@ class FadeContents extends Component {
       duration
     }).start(transforms => {
       if (!this.el) {
-        stop && stop()
+        stop()
         return
       }
       styler(this.el).set(transforms)

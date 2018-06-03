@@ -1,11 +1,10 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import Flipper from "../src/Flipper"
-import Flipped from "../src/Flipper/Flipped"
 import NavbarItem from "../src/Navbar/NavbarItem"
 import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
-import { Caret, DropdownBackground } from "../src/DropdownContainer/Components"
+import { Caret } from "../src/DropdownContainer/Components"
 
 const Navbar = styled.ul`
   display: flex;
@@ -32,16 +31,10 @@ class TransformOriginCenterFLIP extends Component {
     )
     const dropdown = (
       <div>
-        <Flipped flipId="dropdown-caret" translateX>
-          <Caret />
-        </Flipped>
-        <Flipped flipId="dropdown" translateX scaleX scaleY>
-          <FakeDropdownBackground>
-            <Flipped inverseFlipId="dropdown" scaleX scaleY>
-              <div>{dropdownContents}</div>
-            </Flipped>
-          </FakeDropdownBackground>
-        </Flipped>
+        <Caret data-flip-key="dropdown-caret" />
+        <FakeDropdownBackground data-flip-key="dropdown">
+          <div data-inverse-flip-key="dropdown">{dropdownContents}</div>
+        </FakeDropdownBackground>
       </div>
     )
     return (

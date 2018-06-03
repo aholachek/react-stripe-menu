@@ -1,7 +1,6 @@
 import React, { Component } from "react"
-import styled from 'styled-components'
+import styled from "styled-components"
 import Flipper from "../src/Flipper"
-import Flipped from "../src/Flipper/Flipped"
 import NavbarItem from "../src/Navbar/NavbarItem"
 import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
@@ -26,18 +25,14 @@ class InvertedChildFLIP extends Component {
       <DevelopersDropdown />
     )
     const dropdown = (
-      <Flipped flipId="dropdown" translateX translateY scaleX scaleY>
-        <TransformOriginTopLeft>
-          <Caret />
-          <DropdownBackground>
-            <Flipped inverseFlipId="dropdown" scaleX scaleY>
-              <TransformOriginTopLeft>
-                {dropdownContents}
-              </TransformOriginTopLeft>
-            </Flipped>
-          </DropdownBackground>
-        </TransformOriginTopLeft>
-      </Flipped>
+      <TransformOriginTopLeft data-flip-key="dropdown">
+        <Caret />
+        <DropdownBackground>
+          <TransformOriginTopLeft data-inverse-flip-key="dropdown">
+            {dropdownContents}
+          </TransformOriginTopLeft>
+        </DropdownBackground>
+      </TransformOriginTopLeft>
     )
     return (
       <div>

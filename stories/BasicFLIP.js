@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import Flipper from "../src/Flipper"
-import Flipped from "../src/Flipper/Flipped"
 import NavbarItem from "../src/Navbar/NavbarItem"
 import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
@@ -26,12 +25,10 @@ class BasicFLIP extends Component {
       <DevelopersDropdown />
     )
     const dropdown = (
-      <Flipped flipId="dropdown" translateX translateY scaleX scaleY>
-        <TransformOriginTopLeft>
-          <Caret />
-          <DropdownBackground>{dropdownContents}</DropdownBackground>
-        </TransformOriginTopLeft>
-      </Flipped>
+      <TransformOriginTopLeft data-flip-key="dropdown">
+        <Caret />
+        <DropdownBackground>{dropdownContents}</DropdownBackground>
+      </TransformOriginTopLeft>
     )
     return (
       <div>

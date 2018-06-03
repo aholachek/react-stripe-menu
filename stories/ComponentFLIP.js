@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import Flipper from "../src/Flipper"
-import Flipped from "../src/Flipper/Flipped"
 import NavbarItem from "../src/Navbar/NavbarItem"
 import ProductsDropdown from "../src/DropdownContents/ProductsDropdown"
 import DevelopersDropdown from "../src/DropdownContents/DevelopersDropdown"
@@ -28,18 +27,12 @@ class ComponentFLIP extends Component {
     )
     const dropdown = (
       <TransformOriginTopLeft>
-        <Flipped flipId="dropdown-caret" translateX>
-          <Caret />
-        </Flipped>
-        <Flipped flipId="dropdown" translateX scaleX scaleY>
-          <DropdownBackground>
-            <Flipped inverseFlipId="dropdown" scaleX scaleY>
-              <TransformOriginTopLeft>
-                {dropdownContents}
-              </TransformOriginTopLeft>
-            </Flipped>
-          </DropdownBackground>
-        </Flipped>
+        <Caret data-flip-key="dropdown-caret" />
+        <DropdownBackground data-flip-key="dropdown">
+          <TransformOriginTopLeft inverse-flip-key="dropdown">
+            {dropdownContents}
+          </TransformOriginTopLeft>
+        </DropdownBackground>
       </TransformOriginTopLeft>
     )
     return (
