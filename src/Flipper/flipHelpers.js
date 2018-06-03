@@ -24,8 +24,8 @@ const invertTransformsForChildren = (
 }
 
 export const animateMove = ({
-  flippedElements,
-  containerEl,
+  flippedElements, // object of position deltas provided by Flipping.js
+  containerEl, // the parent ref from our Flipper component
   duration,
   ease
 }) => {
@@ -33,26 +33,34 @@ export const animateMove = ({
   const defaultVals = { translateX: 0, translateY: 0, scaleY: 1, scaleX: 1 }
 
   Object.keys(flippedElements).forEach(id => {
-    const { element, delta } = flippedElements[id]
+    const { element, delta, type } = flippedElements[id]
+    // we only care if the component's position or size changed
+    if (type !== "MOVE") return
+
+    // styler is provided by Popmotion to performantly apply styles to a DOM element
+    // we'll use this styler to actually apply the animated values
+    const elStyler = styler(element)
 
     const fromVals = { ...defaultVals }
-    // we're only going to animate the values that the child wants animated,
+    // we're only going to animate the values that the child has requested to be animated,
     // based on its data-* attributes
     if (element.dataset.translateX) fromVals.translateX = delta.left
     if (element.dataset.translateY) fromVals.translateY = delta.top
     if (element.dataset.scaleX) fromVals.scaleX = delta.width
     if (element.dataset.scaleY) fromVals.scaleY = delta.height
 
-    // before animating, immediately apply FLIP styles to prevent flicker
-    // (which was only detectable on Safari)
-    styler(element)
-      .set(fromVals)
-      .render()
+    // before animating, immediately apply FLIP styles to prevent possibility of flicker
+    elStyler.set(fromVals).render()
+    // and apply any styles that children elements requested to cancel out parent transforms
     invertTransformsForChildren(getInvertedChildren(element, id), fromVals, {
       immediate: true
     })
 
-    // now start the animation
+    // first, initialize the animation by creating a tween
+    // then, kick off the tween by calling start, which will gradually update all the transform values
+    // contained in the "from" key to the values in the "to key"
+    // on each tick of the tween, we'll apply the styles to the element using the elStyler
+    // "transforms" is an object like: { translateX, translateY, scaleX, scaleY }
     const { stop } = tween({
       from: fromVals,
       to: defaultVals,
@@ -62,11 +70,11 @@ export const animateMove = ({
       // just to be safe: if the component has been removed from the DOM
       // immediately cancel any in-progress animations
       if (!body.contains(element)) {
-        stop && stop()
+        stop()
         return
       }
-      styler(element).set(transforms)
-      // for children that requested it, cancel out the transform by applying the inverse transform
+      elStyler.set(transforms)
+      // and apply any styles that children elements requested to cancel out parent transforms
       invertTransformsForChildren(getInvertedChildren(element, id), transforms)
     })
   })
