@@ -5,7 +5,7 @@ export const TransformOriginTopLeft = styled.div`
 `
 
 const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
-  if (direction && !animatingOut) return null
+  if (!animatingOut && direction) return null
   return keyframes`
   from {
     transform: ${animatingOut ? "rotateX(0)" : "rotateX(-15deg)"};
@@ -21,25 +21,27 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 export const DropdownRoot = TransformOriginTopLeft.extend`
   animation-name: ${getDropdownRootKeyFrame};
   animation-duration: ${props => props.duration}ms;
-  animation-fill-mode: forwards;
+  /* flex styles will center the child caret component */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: -20px;
 `
 
-export const Caret = styled.div`
-  position: absolute;
-  display: block;
+export const Caret = TransformOriginTopLeft.extend`
   width: 0;
   height: 0;
   border-width: 10px;
   border-style: solid;
-  border-color: transparent transparent #fff;
-  top: -20px;
-  left: calc(50% - 10px);
+  border-color: transparent transparent var(--white);
+  /* make sure it's above the main dropdown container so now box-shadow bleeds over it */
   z-index: 1;
 `
 
 export const DropdownBackground = styled.div`
   transform-origin: 0 0;
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
