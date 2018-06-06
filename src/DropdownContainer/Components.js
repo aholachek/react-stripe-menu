@@ -21,7 +21,9 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 export const DropdownRoot = TransformOriginTopLeft.extend`
   animation-name: ${getDropdownRootKeyFrame};
   animation-duration: ${props => props.duration}ms;
-  /* flex styles will center the child caret component */
+  /* use 'forwards' to prevent flicker on leave animation */
+  animation-fill-mode: forwards;
+  /* flex styles will center the caret child component */
   display: flex;
   flex-direction: column;
   align-items: center;
