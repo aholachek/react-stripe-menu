@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Icon, DropdownSection, Heading } from "./Components"
 
 const ProductsDropdownEl = styled.div`
-  width: 525px;
+  width: 31rem;
 `
 
 const Logo = styled.div`
