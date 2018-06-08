@@ -5,9 +5,10 @@ import styled from "styled-components"
 const Form = styled.form`
   padding: 2.5rem 0;
   background-color: #fff;
+  display: flex;
+  justify-content: center;
 
   > div {
-    max-width: 925px;
     margin: auto;
     display: flex;
   }
@@ -43,29 +44,42 @@ class DemoControls extends Component {
         innerRef={el => (this.el = el)}
         onChange={() => {
           this.props.onChange({
-            duration: parseInt(this.el.querySelector('input[name="duration"]:checked').value, 10),
+            duration: parseInt(
+              this.el.querySelector('input[name="duration"]:checked').value,
+              10
+            ),
             ease: this.el.querySelector('input[name="ease"]:checked').value
           })
         }}
       >
         <div>
           <fieldset key="duration">
-            <legend>Duration:</legend>
+            <legend>Duration (ms):</legend>
             {[0, 250, 500, 1500].map(d => {
               return (
                 <label key={d}>
-                  <input type="radio" name="duration" value={d} checked={duration === d} />
-                  {d}&nbsp;ms
+                  <input
+                    type="radio"
+                    name="duration"
+                    value={d}
+                    checked={duration === d}
+                  />
+                  {d}
                 </label>
               )
             })}
           </fieldset>
           <fieldset key="easing">
             <legend>Easing:</legend>
-            {["linear", "easeInOut", "easeOut", "backOut"].map(e => {
+            {["easeInOut", "easeOut", "backOut"].map(e => {
               return (
                 <label key={e}>
-                  <input type="radio" name="ease" value={e} checked={ease === e} />
+                  <input
+                    type="radio"
+                    name="ease"
+                    value={e}
+                    checked={ease === e}
+                  />
                   {e}
                 </label>
               )
