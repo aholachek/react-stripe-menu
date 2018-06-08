@@ -24,11 +24,11 @@ class FadeContents extends Component {
     if (!direction) return
     const from = {
       opacity: animatingOut ? 1 : 0,
-      translateX: animatingOut ? 0 : direction === "left" ? 100 : -100
+      translateX: animatingOut ? 0 : direction === "left" ? 50 : -50
     }
     const to = {
       opacity: animatingOut ? 0 : 1,
-      translateX: !animatingOut ? 0 : direction === "left" ? -100 : 100
+      translateX: !animatingOut ? 0 : direction === "left" ? -50 : 50
     }
     const { stop } = tween({
       from,

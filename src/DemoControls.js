@@ -3,13 +3,12 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 const Form = styled.form`
-  padding: 2.5rem 0;
+  padding: 2rem 0 1rem 0;
   background-color: #fff;
   display: flex;
   justify-content: center;
 
   > div {
-    margin: auto;
     display: flex;
   }
 
