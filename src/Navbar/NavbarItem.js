@@ -2,34 +2,36 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
-const NavbarItemButton = styled.div`
+const NavbarItemTitle = styled.button`
+  background: transparent;
+  border: 0;
   font-weight: bold;
+  font-family: inherit;
   font-size: 18px;
-  padding: 3rem 3rem 2rem 3rem;
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
   color: white;
   display: flex;
   justify-content: center;
   transition: opacity 250ms;
   cursor: pointer;
-  &:hover {
-    opacity: .7;
+  /* position above the dropdown, otherwise the dropdown will cover up the bottom sliver of the buttons */
+  position: relative;
+  z-index: 2;
+  &:hover, &:focus {
+    opacity: 0.7;
+    outline:none;
   }
 `
 
 const NavbarItemEl = styled.li`
-  flex: 1;
   position: relative;
-  margin-left: 0.5rem;
-  &::first-of-type {
-    margin-left: 0;
-  }
 `
 
 const DropdownSlot = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  perspective: 1000px;
+  perspective: 1500px;
 `
 
 export default class NavbarItem extends Component {
@@ -46,8 +48,8 @@ export default class NavbarItem extends Component {
   render() {
     const { title, children } = this.props
     return (
-      <NavbarItemEl onMouseEnter={this.onMouseEnter}>
-        <NavbarItemButton>{title}</NavbarItemButton>
+      <NavbarItemEl onMouseEnter={this.onMouseEnter} onFocus={this.onMouseEnter}>
+        <NavbarItemTitle>{title}</NavbarItemTitle>
         <DropdownSlot>{children}</DropdownSlot>
       </NavbarItemEl>
     )

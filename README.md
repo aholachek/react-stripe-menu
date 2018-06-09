@@ -2,8 +2,7 @@
 
 Built with React, Popmotion and Styled Components
 
-[Demo](http://aholachek.github.io/react-stripe-menu)
-
+[View demo here](http://aholachek.github.io/react-stripe-menu)
 
 ### Caveats
 

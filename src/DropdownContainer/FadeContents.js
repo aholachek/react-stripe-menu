@@ -24,11 +24,11 @@ class FadeContents extends Component {
     if (!direction) return
     const from = {
       opacity: animatingOut ? 1 : 0,
-      translateX: animatingOut ? 0 : direction === "left" ? 50 : -50
+      translateX: animatingOut ? 0 : direction === "left" ? 30 : -30
     }
     const to = {
       opacity: animatingOut ? 0 : 1,
-      translateX: !animatingOut ? 0 : direction === "left" ? -50 : 50
+      translateX: !animatingOut ? 0 : direction === "left" ? -30 : 30
     }
     const { stop } = tween({
       from,
@@ -47,6 +47,8 @@ class FadeContents extends Component {
     const { children, animatingOut, innerRef, direction } = this.props
     return (
       <FadeContainer
+       // prevent screen readers from reading out hidden content
+        aria-hidden={animatingOut}
         animatingOut={animatingOut}
         direction={direction}
         initialOpacity={!animatingOut && direction ? 0 : 1}

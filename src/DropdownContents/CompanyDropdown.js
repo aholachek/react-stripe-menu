@@ -9,7 +9,7 @@ import {
 } from "./Components"
 
 const CompanyDropdownEl = styled.div`
-  width: 23rem;
+  width: 18.5rem;
 `
 
 const CompanyDropdown = () => {

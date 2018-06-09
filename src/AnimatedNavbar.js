@@ -35,6 +35,8 @@ export default class AnimatedNavbar extends Component {
   }
 
   onMouseEnter = i => {
+    if (this.state.activeIndices[this.state.activeIndices.length - 1] === i)
+      return
     if (this.animatingOutTimeout) {
       clearTimeout(this.animatingOutTimeout)
       this.resetDropdownState()

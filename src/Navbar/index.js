@@ -2,12 +2,12 @@ import React, { Component } from "react"
 import styled from "styled-components"
 
 const NavbarEl = styled.nav`
-  max-width: 35rem;
   margin: auto;
 `
 
 const NavbarList = styled.ul`
   display: flex;
+  justify-content: center;
   list-style: none;
   margin: 0;
 `

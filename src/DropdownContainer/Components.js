@@ -39,6 +39,9 @@ export const Caret = TransformOriginTopLeft.extend`
   border-color: transparent transparent var(--white);
   /* make sure it's above the main dropdown container so now box-shadow bleeds over it */
   z-index: 1;
+  position: relative;
+  /* prevent any gap in between caret and main dropdown */
+  top: 1px;
 `
 
 export const DropdownBackground = styled.div`
