@@ -11,19 +11,17 @@ const invertTransformsForChildren = (
   { scaleY, scaleX },
   options = {}
 ) => {
-  const inverseVals = {
-    scaleX: 1 / scaleX,
-    scaleY: 1 / scaleY
-  }
   childElements.forEach(child => {
-    const setter = styler(child).set(inverseVals)
+    const setter = styler(child).set({
+      scaleX: 1 / scaleX,
+      scaleY: 1 / scaleY
+    })
     if (options.immediate) setter.render()
   })
 }
 
 export const animateMove = ({
   flippedElements, // object of position deltas provided by Flipping.js
-  containerEl, // the parent ref from our Flipper component
   duration,
   ease
 }) => {
@@ -34,8 +32,7 @@ export const animateMove = ({
     // we only care if the component's position or size changed
     if (type !== "MOVE") return
 
-    // styler is provided by Popmotion to performantly apply styles to a DOM element
-    // we'll use this styler to actually apply the animated values
+    // styler(el) creates a function that will performantly apply styles to a DOM element
     const elStyler = styler(element)
 
     const fromVals = {

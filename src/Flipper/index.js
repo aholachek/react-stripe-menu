@@ -32,7 +32,6 @@ class Flipper extends Component {
   onFlip = flippedElements => {
     animateMove({
       flippedElements,
-      containerEl: this.el,
       duration: this.props.duration,
       ease: this.props.ease
     })
