@@ -44,6 +44,8 @@ export const animateMove = ({
 
     // before animating, immediately apply transforms
     // to prevent possibility of flicker
+    // "render()" is a Popmotion method to force immediate
+    // style application
     elStyler.set(fromVals).render()
     // and apply any styles that children elements requested to
     // cancel out parent transforms
