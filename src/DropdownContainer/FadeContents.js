@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { tween, styler } from "popmotion"
 
 const FadeContainer = styled.div`
+ /* make sure the "animatingOut" dropdown doesn't affect layout by giving it position: absolute */
   position: ${props => (props.animatingOut ? "absolute" : "relative")};
   opacity: ${props => (props.direction && !props.animatingOut ? 0 : 1)};
   top: 0;
@@ -51,7 +52,6 @@ class FadeContents extends Component {
         aria-hidden={animatingOut}
         animatingOut={animatingOut}
         direction={direction}
-        initialOpacity={!animatingOut && direction ? 0 : 1}
         innerRef={el => {
           this.el = el
           innerRef(el)
