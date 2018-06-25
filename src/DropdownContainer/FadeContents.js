@@ -21,27 +21,23 @@ class FadeContents extends Component {
   }
 
   componentDidMount() {
-    const { direction, animatingOut, duration } = this.props
-    if (!direction) return
+    const { direction, animatingOut, duration } = this.props;
+    if (!direction) return;
     const from = {
       opacity: animatingOut ? 1 : 0,
-      translateX: animatingOut ? 0 : direction === "left" ? 30 : -30
-    }
+      translateX: animatingOut ? 0 : direction === "left" ? 25 : -25
+    };
     const to = {
       opacity: animatingOut ? 0 : 1,
-      translateX: !animatingOut ? 0 : direction === "left" ? -30 : 30
-    }
-    const { stop } = tween({
+      translateX: !animatingOut ? 0 : direction === "left" ? -25 : 25
+    };
+    tween({
       from,
       to,
-      duration
+      duration : duration * 1.75
     }).start(transforms => {
-      if (!this.el) {
-        stop()
-        return
-      }
-      styler(this.el).set(transforms)
-    })
+      this.el && styler(this.el).set(transforms);
+    });
   }
 
   render() {
