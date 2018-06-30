@@ -70,7 +70,7 @@ class DemoControls extends Component {
           </fieldset>
           <fieldset key="easing">
             <legend>Easing:</legend>
-            {["easeInOut", "easeOut", "backOut"].map(e => {
+            {["linear", "easeOutExpo", "easeOutSine"].map(e => {
               return (
                 <label key={e}>
                   <input

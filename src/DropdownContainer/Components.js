@@ -1,9 +1,5 @@
 import styled, { keyframes } from "styled-components"
 
-export const TransformOriginTopLeft = styled.div`
-  transform-origin: 0 0;
-`
-
 const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
   if (!animatingOut && direction) return null
   return keyframes`
@@ -18,7 +14,8 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 `
 }
 
-export const DropdownRoot = TransformOriginTopLeft.extend`
+export const DropdownRoot = styled.div`
+  transform-origin: 0 0;
   animation-name: ${getDropdownRootKeyFrame};
   animation-duration: ${props => props.duration}ms;
   /* use 'forwards' to prevent flicker on leave animation */
@@ -31,7 +28,7 @@ export const DropdownRoot = TransformOriginTopLeft.extend`
   top: -20px;
 `
 
-export const Caret = TransformOriginTopLeft.extend`
+export const Caret = styled.div`
   width: 0;
   height: 0;
   border-width: 10px;
@@ -63,4 +60,5 @@ export const AltBackground = styled.div`
   left: -50%;
   transform-origin: 0 0;
   z-index: 0;
+  transition: transform ${props => props.duration}ms;
 `

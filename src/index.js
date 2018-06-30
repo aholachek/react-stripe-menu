@@ -6,7 +6,6 @@ import cssVars from "css-vars-ponyfill"
 
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
-import { easing } from "popmotion"
 import AnimatedNavbar from "./AnimatedNavbar"
 import DemoControls from "./DemoControls"
 import styled from "styled-components"
@@ -26,7 +25,7 @@ const AppContainer = styled.div`
 `
 
 class App extends Component {
-  state = { duration: 250, ease: "easeOut" }
+  state = { duration: 250, ease: "easeOutSine" }
 
   onChange = data => {
     this.setState(data)
@@ -49,7 +48,7 @@ class App extends Component {
       <AppContainer>
         <AnimatedNavbar
           tweenConfig={{
-            ease: easing[this.state.ease],
+            ease: this.state.ease,
             duration: this.state.duration
           }}
         />

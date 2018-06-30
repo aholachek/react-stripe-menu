@@ -1,14 +1,13 @@
 import React, { Component, Children } from "react"
 import PropTypes from "prop-types"
+import { Flipped } from "react-flip-toolkit"
 import {
   DropdownRoot,
-  TransformOriginTopLeft,
   Caret,
   DropdownBackground,
   AltBackground
 } from "./Components"
 import FadeContents from "./FadeContents"
-import { tween, styler } from "popmotion"
 
 const getFirstDropdownSectionHeight = el => {
   if (!el) return null
@@ -20,25 +19,27 @@ const getFirstDropdownSectionHeight = el => {
 const updateAltBackground = ({
   altBackground,
   prevDropdown,
-  currentDropdown,
-  tweenConfig
+  currentDropdown
 }) => {
   const prevHeight = getFirstDropdownSectionHeight(prevDropdown)
   const currentHeight = getFirstDropdownSectionHeight(currentDropdown)
 
+  const immediateSetTranslateY = (el, translateY) => {
+    el.style.transform = `translateY(${translateY}px)`
+    el.style.transition = "transform 0s"
+    requestAnimationFrame(() => (el.style.transitionDuration = ""))
+  }
+
   if (prevHeight) {
     // transition the grey ("alt") background from its previous height to its current height
-    tween({
-      from: {
-        translateY: prevHeight
-      },
-      to: { translateY: currentHeight },
-      ...tweenConfig
-    }).start(styler(altBackground).set)
+    immediateSetTranslateY(altBackground, prevHeight)
+    requestAnimationFrame(() => {
+      altBackground.style.transform = `translateY(${currentHeight}px)`
+    })
   } else {
     // just immediately set the background to the appropriate height
     // since we don't have a stored value
-    styler(altBackground).set({ translateY: currentHeight })
+    immediateSetTranslateY(altBackground, currentHeight)
   }
 }
 
@@ -49,7 +50,7 @@ class DropdownContainer extends Component {
     direction: PropTypes.oneOf(["left", "right"]),
     tweenConfig: PropTypes.shape({
       duration: PropTypes.number,
-      easing: PropTypes.func
+      easing: PropTypes.string
     })
   }
 
@@ -71,31 +72,38 @@ class DropdownContainer extends Component {
         animatingOut={animatingOut}
         duration={tweenConfig.duration}
       >
-      {/* separate caret component out so that the main DropdownBackground can have overflow:hidden */}
-        <Caret data-flip-key="dropdown-caret" />
-        <DropdownBackground data-flip-key="dropdown">
-        {/* using styled-components to make sure that all FLIP-ped components have transform-origin: 0 0; set */}
-          <TransformOriginTopLeft data-inverse-flip-key="dropdown">
-            <AltBackground innerRef={el => (this.altBackgroundEl = el)} />
-            <FadeContents
-              direction={direction}
-              duration={tweenConfig.duration}
-              innerRef={el => (this.currentDropdownEl = el)}
-            >
-              {currentDropdown}
-            </FadeContents>
-            {prevDropdown && (
-              <FadeContents
-                animatingOut
-                direction={direction}
-                duration={tweenConfig.duration}
-                innerRef={el => (this.prevDropdownEl = el)}
-              >
-                {prevDropdown}
-              </FadeContents>
-            )}
-          </TransformOriginTopLeft>
-        </DropdownBackground>
+        <Flipped flipId="dropdown-caret">
+          <Caret />
+        </Flipped>
+        <Flipped flipId="dropdown">
+          <DropdownBackground>
+            <Flipped inverseFlipId="dropdown" scale>
+              <div>
+                <AltBackground
+                  innerRef={el => (this.altBackgroundEl = el)}
+                  duration={tweenConfig.duration}
+                />
+                <FadeContents
+                  direction={direction}
+                  duration={tweenConfig.duration}
+                  innerRef={el => (this.currentDropdownEl = el)}
+                >
+                  {currentDropdown}
+                </FadeContents>
+                {prevDropdown && (
+                  <FadeContents
+                    animatingOut
+                    direction={direction}
+                    duration={tweenConfig.duration}
+                    innerRef={el => (this.prevDropdownEl = el)}
+                  >
+                    {prevDropdown}
+                  </FadeContents>
+                )}
+              </div>
+            </Flipped>
+          </DropdownBackground>
+        </Flipped>
       </DropdownRoot>
     )
   }

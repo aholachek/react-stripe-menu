@@ -1,12 +1,31 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import styled from "styled-components"
-import { tween, styler } from "popmotion"
+import styled, { keyframes } from "styled-components"
+
+const getFadeContainerKeyFrame = ({ animatingOut, direction }) => {
+  if (!direction) return
+  return keyframes`
+  from {
+    transform: translateX(${
+      animatingOut ? 0 : direction === "left" ? 25 : -25
+    }px);
+  }
+  to {
+    transform: translateX(${
+      !animatingOut ? 0 : direction === "left" ? -25 : 25
+    }px);
+    opacity: ${animatingOut ? 0 : 1};
+  }
+`
+}
 
 const FadeContainer = styled.div`
- /* make sure the "animatingOut" dropdown doesn't affect layout by giving it position: absolute */
+  animation-name: ${getFadeContainerKeyFrame};
+  animation-duration: ${props => props.duration * 0.5}ms;
+  animation-fill-mode: forwards;
   position: ${props => (props.animatingOut ? "absolute" : "relative")};
   opacity: ${props => (props.direction && !props.animatingOut ? 0 : 1)};
+  animation-timing-function: linear;
   top: 0;
   left: 0;
 `
@@ -20,34 +39,15 @@ class FadeContents extends Component {
     innerRef: PropTypes.func
   }
 
-  componentDidMount() {
-    const { direction, animatingOut, duration } = this.props;
-    if (!direction) return;
-    const from = {
-      opacity: animatingOut ? 1 : 0,
-      translateX: animatingOut ? 0 : direction === "left" ? 25 : -25
-    };
-    const to = {
-      opacity: animatingOut ? 0 : 1,
-      translateX: !animatingOut ? 0 : direction === "left" ? -25 : 25
-    };
-    tween({
-      from,
-      to,
-      duration : duration * 1.75
-    }).start(transforms => {
-      this.el && styler(this.el).set(transforms);
-    });
-  }
-
   render() {
-    const { children, animatingOut, innerRef, direction } = this.props
+    const { children, duration, animatingOut, innerRef, direction } = this.props
     return (
       <FadeContainer
-       // prevent screen readers from reading out hidden content
+        // prevent screen readers from reading out hidden content
         aria-hidden={animatingOut}
         animatingOut={animatingOut}
         direction={direction}
+        duration={duration}
         innerRef={el => {
           this.el = el
           innerRef(el)

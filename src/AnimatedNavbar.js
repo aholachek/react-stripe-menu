@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Navbar from "./Navbar"
 import NavbarItem from "./Navbar/NavbarItem"
-import Flipper from "./Flipper"
+import { Flipper } from "react-flip-toolkit"
 import DropdownContainer from "./DropdownContainer"
 import CompanyDropdown from "./DropdownContents/CompanyDropdown"
 import DevelopersDropdown from "./DropdownContents/DevelopersDropdown"
@@ -47,15 +47,15 @@ export default class AnimatedNavbar extends Component {
     }))
   }
 
-  onMouseLeave = () => {
-    this.setState({
-      animatingOut: true
-    })
-    this.animatingOutTimeout = setTimeout(
-      this.resetDropdownState,
-      this.props.tweenConfig.duration
-    )
-  }
+  // onMouseLeave = () => {
+  //   this.setState({
+  //     animatingOut: true
+  //   })
+  //   this.animatingOutTimeout = setTimeout(
+  //     this.resetDropdownState,
+  //     this.props.tweenConfig.duration
+  //   )
+  // }
 
   render() {
     const { tweenConfig } = this.props
