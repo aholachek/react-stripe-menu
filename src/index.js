@@ -31,18 +31,6 @@ class App extends Component {
     this.setState(data)
   }
 
-  componentDidMount() {
-    const hasDurationQuery = /duration=\d+/.test(window.location.search)
-    if (hasDurationQuery) {
-      this.setState({
-        duration: parseInt(
-          window.location.search.match(/duration=(\d+)/)[1],
-          10
-        )
-      })
-    }
-  }
-
   render() {
     return (
       <AppContainer>
