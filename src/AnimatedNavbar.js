@@ -47,15 +47,15 @@ export default class AnimatedNavbar extends Component {
     }))
   }
 
-  // onMouseLeave = () => {
-  //   this.setState({
-  //     animatingOut: true
-  //   })
-  //   this.animatingOutTimeout = setTimeout(
-  //     this.resetDropdownState,
-  //     this.props.tweenConfig.duration
-  //   )
-  // }
+  onMouseLeave = () => {
+    this.setState({
+      animatingOut: true
+    })
+    this.animatingOutTimeout = setTimeout(
+      this.resetDropdownState,
+      this.props.tweenConfig.duration
+    )
+  }
 
   render() {
     const { tweenConfig } = this.props

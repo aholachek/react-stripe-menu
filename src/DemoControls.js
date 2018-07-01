@@ -54,7 +54,7 @@ class DemoControls extends Component {
         <div>
           <fieldset key="duration">
             <legend>Duration (ms):</legend>
-            {[0, 250, 500, 1500].map(d => {
+            {[0, 300, 500, 1500].map(d => {
               return (
                 <label key={d}>
                   <input
