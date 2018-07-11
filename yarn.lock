@@ -6840,13 +6840,14 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
-react-flip-toolkit@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/react-flip-toolkit/-/react-flip-toolkit-2.0.8.tgz#ddf97fca7b212220812a85a19d45c59806be7eea"
+react-flip-toolkit@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-flip-toolkit/-/react-flip-toolkit-3.0.3.tgz#96ef83ce7b6104cc7012788c8de71dda87507b54"
   dependencies:
     prop-types "^15.6.2"
     rematrix "^0.2.2"
     shifty "^2.3.1"
+    wobble "^1.5.0"
 
 react-fuzzy@^0.5.2:
   version "0.5.2"
@@ -8668,6 +8669,10 @@ widest-line@^2.0.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+
+wobble@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/wobble/-/wobble-1.5.0.tgz#5192d6681642ca22e4e133408628b99e9a7d1559"
 
 wordwrap@0.0.2:
   version "0.0.2"

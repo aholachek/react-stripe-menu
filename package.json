@@ -9,7 +9,7 @@
     "normalize.css": "^8.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-flip-toolkit": "^2.0.8",
+    "react-flip-toolkit": "^3.0.3",
     "react-scripts": "1.1.4",
     "styled-components": "^3.2.6"
   },
