@@ -6840,13 +6840,13 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
-react-flip-toolkit@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/react-flip-toolkit/-/react-flip-toolkit-3.0.3.tgz#96ef83ce7b6104cc7012788c8de71dda87507b54"
+react-flip-toolkit@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-flip-toolkit/-/react-flip-toolkit-3.0.4.tgz#25423ad4eecde413855018229b13810701381315"
   dependencies:
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
     rematrix "^0.2.2"
-    shifty "^2.3.1"
     wobble "^1.5.0"
 
 react-fuzzy@^0.5.2:
@@ -7562,12 +7562,6 @@ shelljs@^0.8.1:
 shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
-
-shifty@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/shifty/-/shifty-2.3.1.tgz#ca92001c04718911f3b48d179aa858cc9cc86009"
-  dependencies:
-    object-assign "^4.1.1"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"

@@ -26,21 +26,23 @@ export default class AnimatedNavbar extends Component {
     activeIndices: []
   }
 
-  resetDropdownState = () => {
+  resetDropdownState = i => {
     this.setState({
-      activeIndices: [],
+      activeIndices: typeof i === "number" ? [i] : [],
       animatingOut: false
     })
     delete this.animatingOutTimeout
   }
 
   onMouseEnter = i => {
-    if (this.state.activeIndices[this.state.activeIndices.length - 1] === i)
-      return
     if (this.animatingOutTimeout) {
       clearTimeout(this.animatingOutTimeout)
-      this.resetDropdownState()
+      this.resetDropdownState(i)
+      return
     }
+    if (this.state.activeIndices[this.state.activeIndices.length - 1] === i)
+      return
+
     this.setState(prevState => ({
       activeIndices: prevState.activeIndices.concat(i),
       animatingOut: false
