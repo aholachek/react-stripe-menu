@@ -40,7 +40,7 @@ class DemoControls extends Component {
     const { duration, ease } = this.props
     return (
       <Form
-        innerRef={el => (this.el = el)}
+        ref={el => (this.el = el)}
         onChange={() => {
           this.props.onChange({
             duration: parseInt(

@@ -80,7 +80,7 @@ class DropdownContainer extends Component {
             <Flipped inverseFlipId="dropdown" scale>
               <div>
                 <AltBackground
-                  innerRef={el => (this.altBackgroundEl = el)}
+                  ref={el => (this.altBackgroundEl = el)}
                   duration={tweenConfig.duration}
                 />
                 <FadeContents

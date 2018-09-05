@@ -3,21 +3,21 @@ import PropTypes from "prop-types"
 import styled, { keyframes } from "styled-components"
 
 const getFadeContainerKeyFrame = ({ animatingOut, direction }) => {
-  if (!direction) return;
+  if (!direction) return
   return keyframes`
   from {
     transform: translateX(${
-      animatingOut ? 0 : direction === "left" ? 20 : -20
+      animatingOut ? 0 : direction === "left" ? 75 : -75
     }px);
   }
   to {
     transform: translateX(${
-      !animatingOut ? 0 : direction === "left" ? -20 : 20
+      !animatingOut ? 0 : direction === "left" ? -75 : 75
     }px);
     opacity: ${animatingOut ? 0 : 1};
   }
-`;
-};
+`
+}
 
 const FadeContainer = styled.div`
   animation-name: ${getFadeContainerKeyFrame};
@@ -28,7 +28,7 @@ const FadeContainer = styled.div`
   animation-timing-function: linear;
   top: 0;
   left: 0;
-`;
+`
 
 class FadeContents extends Component {
   static propTypes = {
@@ -36,7 +36,7 @@ class FadeContents extends Component {
     direction: PropTypes.oneOf(["right", "left"]),
     animatingOut: PropTypes.bool,
     children: PropTypes.node,
-    innerRef: PropTypes.func
+    ref: PropTypes.func
   }
 
   render() {
@@ -48,7 +48,7 @@ class FadeContents extends Component {
         animatingOut={animatingOut}
         direction={direction}
         duration={duration}
-        innerRef={el => {
+        ref={el => {
           this.el = el
           innerRef(el)
         }}

@@ -81,7 +81,7 @@ export default class AnimatedNavbar extends Component {
     }
 
     return (
-      <Flipper flipKey={currentIndex} {...tweenConfig}>
+      <Flipper flipKey={currentIndex} spring={{ stiffness: 500, damping: 50 }}>
         <Navbar onMouseLeave={this.onMouseLeave}>
           {navbarConfig.map((n, index) => {
             return (
