@@ -25,7 +25,7 @@ const AppContainer = styled.div`
 `
 
 class App extends Component {
-  state = { duration: 300, ease: "easeOutSine" }
+  state = { duration: 300 }
 
   onChange = data => {
     this.setState(data)
@@ -34,16 +34,10 @@ class App extends Component {
   render() {
     return (
       <AppContainer>
-        <AnimatedNavbar
-          tweenConfig={{
-            ease: this.state.ease,
-            duration: this.state.duration
-          }}
-        />
+        <AnimatedNavbar duration={this.state.duration} />
         <DemoControls
           duration={this.state.duration}
           onChange={this.onChange}
-          ease={this.state.ease}
         />
       </AppContainer>
     )

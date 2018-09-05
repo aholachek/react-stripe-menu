@@ -5,7 +5,8 @@ import {
   DropdownRoot,
   Caret,
   DropdownBackground,
-  AltBackground
+  AltBackground,
+  InvertedDiv
 } from "./Components"
 import FadeContents from "./FadeContents"
 
@@ -48,10 +49,7 @@ class DropdownContainer extends Component {
     children: PropTypes.node.isRequired,
     animatingOut: PropTypes.bool,
     direction: PropTypes.oneOf(["left", "right"]),
-    tweenConfig: PropTypes.shape({
-      duration: PropTypes.number,
-      easing: PropTypes.string
-    })
+    duration: PropTypes.number
   }
 
   componentDidMount() {
@@ -59,48 +57,53 @@ class DropdownContainer extends Component {
       altBackground: this.altBackgroundEl,
       prevDropdown: this.prevDropdownEl,
       currentDropdown: this.currentDropdownEl,
-      tweenConfig: this.props.tweenConfig
+      duration: this.props.duration
     })
   }
 
   render() {
-    const { children, direction, animatingOut, tweenConfig } = this.props
+    const { children, direction, animatingOut, duration } = this.props
     const [currentDropdown, prevDropdown] = Children.toArray(children)
     return (
       <DropdownRoot
         direction={direction}
         animatingOut={animatingOut}
-        duration={tweenConfig.duration}
+        duration={duration}
       >
         <Flipped flipId="dropdown-caret">
           <Caret />
         </Flipped>
         <Flipped flipId="dropdown">
           <DropdownBackground>
-            <Flipped inverseFlipId="dropdown" scale>
-              <div>
+            <Flipped inverseFlipId="dropdown">
+              <InvertedDiv>
                 <AltBackground
                   ref={el => (this.altBackgroundEl = el)}
-                  duration={tweenConfig.duration}
+                  duration={duration}
                 />
                 <FadeContents
                   direction={direction}
-                  duration={tweenConfig.duration}
-                  innerRef={el => (this.currentDropdownEl = el)}
+                  duration={duration}
+                  ref={el => (this.currentDropdownEl = el)}
                 >
                   {currentDropdown}
                 </FadeContents>
+              </InvertedDiv>
+            </Flipped>
+
+            <Flipped inverseFlipId="dropdown" scale>
+              <InvertedDiv absolute>
                 {prevDropdown && (
                   <FadeContents
                     animatingOut
                     direction={direction}
-                    duration={tweenConfig.duration}
-                    innerRef={el => (this.prevDropdownEl = el)}
+                    duration={duration}
+                    ref={el => (this.prevDropdownEl = el)}
                   >
                     {prevDropdown}
                   </FadeContents>
                 )}
-              </div>
+              </InvertedDiv>
             </Flipped>
           </DropdownBackground>
         </Flipped>

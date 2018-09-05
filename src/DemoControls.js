@@ -9,35 +9,30 @@ const Form = styled.form`
   justify-content: center;
 
   > div {
-    display: flex;
-  }
-
-  fieldset {
     border: 0;
     padding: 1rem 0 1rem 0;
     margin-right: 3rem;
+    display: flex;
   }
 
-  legend {
-    font-weight: bold;
-    display: block;
-  }
   input {
     margin-right: 0.5rem;
   }
   label + label input {
     margin-left: 1.5rem;
   }
+  b {
+    margin-right: 1.5rem;
+  }
 `
 
 class DemoControls extends Component {
   static propTypes = {
-    duration: PropTypes.number,
-    ease: PropTypes.string
+    duration: PropTypes.number
   }
 
   render() {
-    const { duration, ease } = this.props
+    const { duration } = this.props
     return (
       <Form
         ref={el => (this.el = el)}
@@ -46,44 +41,27 @@ class DemoControls extends Component {
             duration: parseInt(
               this.el.querySelector('input[name="duration"]:checked').value,
               10
-            ),
-            ease: this.el.querySelector('input[name="ease"]:checked').value
+            )
           })
         }}
       >
         <div>
-          <fieldset key="duration">
-            <legend>Duration (ms):</legend>
-            {[0, 300, 500, 1500].map(d => {
+          <b>Speed</b>
+          {[["normal", 300], ["slow (for debugging)", 1000]].map(
+            ([label, value]) => {
               return (
-                <label key={d}>
+                <label key={value}>
                   <input
                     type="radio"
                     name="duration"
-                    value={d}
-                    checked={duration === d}
+                    value={value}
+                    checked={duration === value}
                   />
-                  {d}
+                  {label}
                 </label>
               )
-            })}
-          </fieldset>
-          <fieldset key="easing">
-            <legend>Easing:</legend>
-            {["linear", "easeOutExpo", "easeOutSine"].map(e => {
-              return (
-                <label key={e}>
-                  <input
-                    type="radio"
-                    name="ease"
-                    value={e}
-                    checked={ease === e}
-                  />
-                  {e}
-                </label>
-              )
-            })}
-          </fieldset>
+            }
+          )}
         </div>
       </Form>
     )
