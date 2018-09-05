@@ -47,18 +47,24 @@ export const DropdownBackground = styled.div`
   border-radius: 4px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
-    0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+  will-change: transform;
 `
 
 export const AltBackground = styled.div`
   background-color: var(--grey);
-  width: 200%;
+  width: 300%;
   height: 100%;
   position: absolute;
   top: 0;
-  left: -50%;
+  left: -100%;
   transform-origin: 0 0;
   z-index: 0;
   transition: transform ${props => props.duration}ms;
+`
+
+export const InvertedDiv = styled.div`
+  will-change: transform;
+  position: ${props => (props.absolute ? "absolute" : "relative")};
+  top:0;
+  left:0;
 `

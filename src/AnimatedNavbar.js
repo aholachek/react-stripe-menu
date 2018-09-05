@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import PropTypes from "prop-types"
 import Navbar from "./Navbar"
 import NavbarItem from "./Navbar/NavbarItem"
 import { Flipper } from "react-flip-toolkit"
@@ -15,13 +14,6 @@ const navbarConfig = [
 ]
 
 export default class AnimatedNavbar extends Component {
-  static propTypes = {
-    tweenConfig: PropTypes.shape({
-      duration: PropTypes.number,
-      easing: PropTypes.func
-    })
-  }
-
   state = {
     activeIndices: []
   }
@@ -55,13 +47,12 @@ export default class AnimatedNavbar extends Component {
     })
     this.animatingOutTimeout = setTimeout(
       this.resetDropdownState,
-      this.props.tweenConfig.duration
+      this.props.duration
     )
   }
 
   render() {
-    const { tweenConfig } = this.props
-
+    const { duration } = this.props
     let CurrentDropdown
     let PrevDropdown
     let direction
@@ -81,7 +72,14 @@ export default class AnimatedNavbar extends Component {
     }
 
     return (
-      <Flipper flipKey={currentIndex} spring={{ stiffness: 500, damping: 50 }}>
+      <Flipper
+        flipKey={currentIndex}
+        spring={
+          duration === 300
+            ? { stiffness: 500, damping: 50 }
+            : { stiffness: 10, damping: 10 }
+        }
+      >
         <Navbar onMouseLeave={this.onMouseLeave}>
           {navbarConfig.map((n, index) => {
             return (
@@ -94,7 +92,7 @@ export default class AnimatedNavbar extends Component {
                   <DropdownContainer
                     direction={direction}
                     animatingOut={this.state.animatingOut}
-                    tweenConfig={this.props.tweenConfig}
+                    duration={duration}
                   >
                     <CurrentDropdown />
                     {PrevDropdown && <PrevDropdown />}
