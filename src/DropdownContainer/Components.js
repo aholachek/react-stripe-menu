@@ -47,8 +47,8 @@ export const DropdownBackground = styled.div`
   border-radius: 4px;
   overflow: hidden;
   position: relative;
-  will-change: transform;
   box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1);
+  will-change: transform;
 `
 
 export const AltBackground = styled.div`
@@ -64,7 +64,6 @@ export const AltBackground = styled.div`
 `
 
 export const InvertedDiv = styled.div`
-  will-change: transform;
   position: ${props => (props.absolute ? "absolute" : "relative")};
   top:0;
   left:0;

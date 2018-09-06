@@ -5,11 +5,6 @@ import styled, { keyframes } from "styled-components"
 const getFadeContainerKeyFrame = ({ animatingOut, direction }) => {
   if (!direction) return
   return keyframes`
-  from {
-    transform: translateX(${
-      animatingOut ? 0 : direction === "left" ? -25 : 25
-    }px);
-  }
   to {
     transform: translateX(0px);
     opacity: ${animatingOut ? 0 : 1};
@@ -23,7 +18,6 @@ const FadeContainer = styled.div`
   opacity: ${props => (props.direction && !props.animatingOut ? 0 : 1)};
   top: 0;
   left: 0;
-  will-change: transform, opacity;
 `
 
 const propTypes = {
