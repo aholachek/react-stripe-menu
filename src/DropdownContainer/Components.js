@@ -48,6 +48,7 @@ export const DropdownBackground = styled.div`
   overflow: hidden;
   position: relative;
   will-change: transform;
+  box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1);
 `
 
 export const AltBackground = styled.div`

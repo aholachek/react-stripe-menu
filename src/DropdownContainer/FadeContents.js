@@ -5,12 +5,17 @@ import styled, { keyframes } from "styled-components"
 const getFadeContainerKeyFrame = ({ animatingOut, direction }) => {
   if (!direction) return
   return keyframes`
+  from {
+    transform: translateX(${
+      animatingOut ? 0 : direction === "left" ? -25 : 25
+    }px);
+  }
   to {
+    transform: translateX(0px);
     opacity: ${animatingOut ? 0 : 1};
   }
 `
 }
-
 const FadeContainer = styled.div`
   animation-name: ${getFadeContainerKeyFrame};
   animation-duration: ${props => props.duration}ms;
@@ -37,10 +42,7 @@ const FadeContents = forwardRef(
       animatingOut={animatingOut}
       direction={direction}
       duration={duration}
-      ref={el => {
-        ref(el)
-        this.el = el
-      }}
+      ref={ref}
     >
       {children}
     </FadeContainer>
