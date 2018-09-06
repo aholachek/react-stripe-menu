@@ -1,10 +1,15 @@
 ## A Stripe-style animated navbar menu
-
 Built with React, [Styled Components](https://www.styled-components.com/), and [React-Flip-Toolkit](https://github.com/aholachek/react-flip-toolkit).
 
-- [View the demo](http://aholachek.github.io/react-stripe-menu)
+<a href="https://aholachek.github.io/react-stripe-menu">
+<img src="./menu.gif">
+</a>
+
+- [View the demo](https://aholachek.github.io/react-stripe-menu)
 
 - [Read the tutorial](https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/)
+
+- [Check out the code for the main dropdown component](https://github.com/aholachek/react-stripe-menu/blob/master/src/DropdownContainer/index.js)
 
 ### Details
 
