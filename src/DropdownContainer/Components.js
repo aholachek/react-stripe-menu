@@ -67,4 +67,6 @@ export const InvertedDiv = styled.div`
   position: ${props => (props.absolute ? "absolute" : "relative")};
   top:0;
   left:0;
+  &:first-of-type{ z-index: 1; }
+  &:not(:first-of-type) { z-index: -1; }
 `
