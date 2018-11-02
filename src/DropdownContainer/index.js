@@ -1,4 +1,4 @@
-import React, { Component, Children } from "react"
+import React, { Component, Children, createRef } from "react"
 import PropTypes from "prop-types"
 import { Flipped } from "react-flip-toolkit"
 import {
@@ -11,10 +11,13 @@ import {
 import FadeContents from "./FadeContents"
 
 const getFirstDropdownSectionHeight = el => {
-  if (!el) return null
-  return el.querySelector("*[data-first-dropdown-section]")
-    ? el.querySelector("*[data-first-dropdown-section]").offsetHeight
-    : 0
+  if (
+    !el ||
+    !el.querySelector ||
+    !el.querySelector("*[data-first-dropdown-section]")
+  )
+    return 0
+  return el.querySelector("*[data-first-dropdown-section]").offsetHeight
 }
 
 const updateAltBackground = ({
@@ -52,11 +55,14 @@ class DropdownContainer extends Component {
     duration: PropTypes.number
   }
 
+  currentDropdownEl = createRef()
+  prevDropdownEl = createRef()
+
   componentDidMount() {
     updateAltBackground({
       altBackground: this.altBackgroundEl,
-      prevDropdown: this.prevDropdownEl,
-      currentDropdown: this.currentDropdownEl,
+      prevDropdown: this.prevDropdownEl.current,
+      currentDropdown: this.currentDropdownEl.current,
       duration: this.props.duration
     })
   }
@@ -84,7 +90,7 @@ class DropdownContainer extends Component {
                 <FadeContents
                   direction={direction}
                   duration={duration}
-                  ref={el => (this.currentDropdownEl = el)}
+                  ref={this.currentDropdownEl}
                 >
                   {currentDropdown}
                 </FadeContents>
@@ -98,7 +104,7 @@ class DropdownContainer extends Component {
                     animatingOut
                     direction={direction}
                     duration={duration}
-                    ref={el => (this.prevDropdownEl = el)}
+                    ref={this.prevDropdownEl}
                   >
                     {prevDropdown}
                   </FadeContents>
