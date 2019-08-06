@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react"
 import PropTypes from "prop-types"
 import styled, { keyframes } from "styled-components"
+import { promoteLayer } from "./utils"
 
 const getFadeContainerKeyFrame = ({ animatingOut, direction }) => {
   if (!direction) return
@@ -12,6 +13,7 @@ const getFadeContainerKeyFrame = ({ animatingOut, direction }) => {
 `
 }
 const FadeContainer = styled.div`
+  ${promoteLayer}
   animation-name: ${getFadeContainerKeyFrame};
   animation-duration: ${props => props.duration}ms;
   animation-fill-mode: forwards;

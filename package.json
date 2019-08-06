@@ -4,14 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "core-js": "^2.5.7",
-    "css-vars-ponyfill": "^1.7.2",
-    "normalize.css": "^8.0.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-flip-toolkit": "6.2.1",
-    "react-scripts": "1.1.4",
-    "styled-components": "4.1.1"
+    "core-js": "^3.1.4",
+    "normalize.css": "^8.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-flip-toolkit": "6.6.9",
+    "react-scripts": "3.0.1",
+    "styled-components": "4.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,5 +24,17 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "gh-pages": "^1.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

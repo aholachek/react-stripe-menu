@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components"
+import { promoteLayer } from "./utils"
 
 const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
   if (!animatingOut && direction) return null
@@ -16,6 +17,7 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 
 export const DropdownRoot = styled.div`
   transform-origin: 0 0;
+  ${promoteLayer}
   animation-name: ${getDropdownRootKeyFrame};
   animation-duration: ${props => props.duration}ms;
   /* use 'forwards' to prevent flicker on leave animation */
@@ -48,7 +50,7 @@ export const DropdownBackground = styled.div`
   overflow: hidden;
   position: relative;
   box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1);
-  will-change: transform;
+  ${promoteLayer}
 `
 
 export const AltBackground = styled.div`
@@ -64,9 +66,14 @@ export const AltBackground = styled.div`
 `
 
 export const InvertedDiv = styled.div`
+  ${promoteLayer}
   position: ${props => (props.absolute ? "absolute" : "relative")};
-  top:0;
-  left:0;
-  &:first-of-type{ z-index: 1; }
-  &:not(:first-of-type) { z-index: -1; }
+  top: 0;
+  left: 0;
+  &:first-of-type {
+    z-index: 1;
+  }
+  &:not(:first-of-type) {
+    z-index: -1;
+  }
 `

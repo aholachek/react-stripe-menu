@@ -1,17 +1,9 @@
-// polyfill es6/es7 methods
-import "core-js/fn/object/entries"
-import "core-js/fn/array/from"
-// ponyfill CSS vars
-import cssVars from "css-vars-ponyfill"
-
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
 import AnimatedNavbar from "./AnimatedNavbar"
 import DemoControls from "./DemoControls"
 import styled from "styled-components"
 import "./index.css"
-
-cssVars()
 
 const AppContainer = styled.div`
   background: linear-gradient(150deg, #53f 15%, #05d5ff);
