@@ -1,6 +1,17 @@
 {
-  "main.css": "static/css/main.44a7ebf7.css",
-  "main.css.map": "static/css/main.44a7ebf7.css.map",
-  "main.js": "static/js/main.0136b5fb.js",
-  "main.js.map": "static/js/main.0136b5fb.js.map"
+  "files": {
+    "main.css": "/react-stripe-menu/static/css/main.26c5cb05.chunk.css",
+    "main.js": "/react-stripe-menu/static/js/main.998a85f3.chunk.js",
+    "main.js.map": "/react-stripe-menu/static/js/main.998a85f3.chunk.js.map",
+    "runtime~main.js": "/react-stripe-menu/static/js/runtime~main.cf391686.js",
+    "runtime~main.js.map": "/react-stripe-menu/static/js/runtime~main.cf391686.js.map",
+    "static/css/2.764ccc25.chunk.css": "/react-stripe-menu/static/css/2.764ccc25.chunk.css",
+    "static/js/2.32364aed.chunk.js": "/react-stripe-menu/static/js/2.32364aed.chunk.js",
+    "static/js/2.32364aed.chunk.js.map": "/react-stripe-menu/static/js/2.32364aed.chunk.js.map",
+    "index.html": "/react-stripe-menu/index.html",
+    "precache-manifest.b680932e8fd67482c217fc5b10bbb7cd.js": "/react-stripe-menu/precache-manifest.b680932e8fd67482c217fc5b10bbb7cd.js",
+    "service-worker.js": "/react-stripe-menu/service-worker.js",
+    "static/css/2.764ccc25.chunk.css.map": "/react-stripe-menu/static/css/2.764ccc25.chunk.css.map",
+    "static/css/main.26c5cb05.chunk.css.map": "/react-stripe-menu/static/css/main.26c5cb05.chunk.css.map"
+  }
 }
