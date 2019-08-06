@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-stripe-menu/static/css/main.26c5cb05.chunk.css",
-    "main.js": "/react-stripe-menu/static/js/main.980fb670.chunk.js",
-    "main.js.map": "/react-stripe-menu/static/js/main.980fb670.chunk.js.map",
+    "main.js": "/react-stripe-menu/static/js/main.3d51654a.chunk.js",
+    "main.js.map": "/react-stripe-menu/static/js/main.3d51654a.chunk.js.map",
     "runtime~main.js": "/react-stripe-menu/static/js/runtime~main.cf391686.js",
     "runtime~main.js.map": "/react-stripe-menu/static/js/runtime~main.cf391686.js.map",
     "static/css/2.764ccc25.chunk.css": "/react-stripe-menu/static/css/2.764ccc25.chunk.css",
     "static/js/2.32364aed.chunk.js": "/react-stripe-menu/static/js/2.32364aed.chunk.js",
     "static/js/2.32364aed.chunk.js.map": "/react-stripe-menu/static/js/2.32364aed.chunk.js.map",
     "index.html": "/react-stripe-menu/index.html",
-    "precache-manifest.ecc3aa8019f1240500ac25607a3c441a.js": "/react-stripe-menu/precache-manifest.ecc3aa8019f1240500ac25607a3c441a.js",
+    "precache-manifest.39ac83afd349ae330a1c9920ed4e27dd.js": "/react-stripe-menu/precache-manifest.39ac83afd349ae330a1c9920ed4e27dd.js",
     "service-worker.js": "/react-stripe-menu/service-worker.js",
     "static/css/2.764ccc25.chunk.css.map": "/react-stripe-menu/static/css/2.764ccc25.chunk.css.map",
     "static/css/main.26c5cb05.chunk.css.map": "/react-stripe-menu/static/css/main.26c5cb05.chunk.css.map"
