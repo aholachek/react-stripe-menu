@@ -80,6 +80,7 @@ export default class AnimatedNavbar extends Component {
           {navbarConfig.map((n, index) => {
             return (
               <NavbarItem
+                key={n.title}
                 title={n.title}
                 index={index}
                 onMouseEnter={this.onMouseEnter}

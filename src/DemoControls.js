@@ -34,17 +34,7 @@ class DemoControls extends Component {
   render() {
     const { duration } = this.props
     return (
-      <Form
-        ref={el => (this.el = el)}
-        onChange={() => {
-          this.props.onChange({
-            duration: parseInt(
-              this.el.querySelector('input[name="duration"]:checked').value,
-              10
-            )
-          })
-        }}
-      >
+      <Form ref={el => (this.el = el)}>
         <div>
           <b>Speed</b>
           {[["normal", 300], ["slow (for debugging)", 1000]].map(
@@ -56,6 +46,11 @@ class DemoControls extends Component {
                     name="duration"
                     value={value}
                     checked={duration === value}
+                    onChange={e => {
+                      if (e.target.checked) {
+                        this.props.onChange({ duration: value })
+                      }
+                    }}
                   />
                   {label}
                 </label>
