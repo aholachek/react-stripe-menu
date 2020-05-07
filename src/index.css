@@ -1,5 +1,5 @@
-@import "~normalize.css";
-@import url('https://fonts.googleapis.com/css?family=Karla:400,700');
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css?family=Karla:400,700");
 * {
   box-sizing: border-box;
 }
@@ -9,14 +9,15 @@
   --grey: #f1f4f8b0;
   --dark-grey: #6b7c93;
   --green: #24b47e;
-  --teal: #4F96CE;
+  --teal: #4f96ce;
   --blue: #6772e5;
-  --dark-blue: #4F3EF5;
+  --dark-blue: #4f3ef5;
   --spacer: 28px;
 }
 
 body {
-  font-family: karla, -apple-system, system-ui, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: karla, -apple-system, system-ui, "Segoe UI", "Roboto",
+    "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   color: var(--dark-grey);
 }
