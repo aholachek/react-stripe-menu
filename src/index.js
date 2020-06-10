@@ -4,6 +4,7 @@ import AnimatedNavbar from "./AnimatedNavbar"
 import DemoControls from "./DemoControls"
 import styled from "styled-components"
 import "./index.css"
+import "normalize.css";
 
 const AppContainer = styled.div`
   background: linear-gradient(150deg, #53f 15%, #05d5ff);
